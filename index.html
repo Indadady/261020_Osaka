@@ -104,6 +104,7 @@
                         <a href="#map-section" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors">탐방동선</a>
                         <a href="#schedule" class="px-3 py-2 text-sm font-bold text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors"><i class="fa-solid fa-calendar-check mr-1"></i>상세일정</a>
                         <a href="#hotel" class="px-3 py-2 text-sm font-bold text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors"><i class="fa-solid fa-bed mr-1"></i>숙소정보</a>
+                        <a href="#smart-info" class="px-3 py-2 text-sm font-bold text-pink-600 hover:text-pink-800 hover:bg-pink-50 rounded-lg transition-colors"><i class="fa-solid fa-wallet mr-1"></i>현지정보</a>
                         <a href="#video" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors">영상자료</a>
                         <a href="#check" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors">준비물</a>
                         <a href="#contact" class="px-3 py-2 text-sm font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors">비상연락망</a>
@@ -114,7 +115,7 @@
             </nav>
         </header>
 
-        <!-- Hero (min-h-screen으로 높이 100% 확장) -->
+        <!-- Hero -->
         <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-center px-4">
             <div class="animate-fade-in-up text-white w-full max-w-4xl flex flex-col items-center">
                 <span class="bg-blue-600/90 text-white px-6 py-2 rounded-full text-lg md:text-xl font-bold mb-6 inline-block border border-white/20 shadow-lg tracking-widest">
@@ -206,7 +207,6 @@
                         <h3 class="font-bold text-slate-800 text-lg mb-6 flex items-center gap-2">
                             <i class="fa-solid fa-building-user text-green-600"></i> 중부권 거점 공항, 청주국제공항 100% 활용하기
                         </h3>
-                        
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
                             <div class="bg-green-50 rounded-xl p-4 border border-green-100 relative group">
                                 <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shadow-md">1</div>
@@ -236,7 +236,7 @@
                     </div>
                 </div>
 
-                <!-- Visit Japan Web Section -->
+                <!-- 🚀 복원됨: Visit Japan Web Section -->
                 <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-md border border-pink-100 overflow-hidden">
                     <div class="grid md:grid-cols-2">
                         <div class="p-8 flex flex-col justify-center items-start">
@@ -267,7 +267,7 @@
             </div>
         </section>
 
-        <!-- Map Section (애니메이션 동선) -->
+        <!-- Map Section -->
         <section id="map-section" class="py-12 bg-white">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-8">
@@ -294,11 +294,9 @@
         <section id="schedule" class="py-16 bg-slate-50 border-t border-slate-200">
             <div class="container mx-auto px-4">
                 <div class="max-w-5xl mx-auto">
-                    
                     <div class="text-center mb-10 relative">
                         <span class="inline-block bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-bold shadow-sm mb-3">OFFICIAL ITINERARY</span>
                         <h2 class="text-3xl font-bold text-slate-800">일자별 상세 일정표</h2>
-                        
                         <!-- 🖨️ 공무원/학교 결재 서류용 인쇄 버튼 -->
                         <button onclick="window.print()" class="mt-6 md:mt-0 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold py-2.5 px-5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 mx-auto md:mx-0 active:scale-95 animate-pulse">
                             <i class="fa-solid fa-print"></i> 일정표 인쇄하기
@@ -529,7 +527,140 @@
             </div>
         </section>
 
-        <!-- Video Curation -->
+        <!-- 🚀 신규 추가: 스마트 현지 정보 (학생용 물가, 환율계산기, 날씨) -->
+        <section id="smart-info" class="py-16 bg-slate-100 border-t border-slate-200">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-10">
+                    <span class="inline-block bg-pink-100 text-pink-700 text-xs px-3 py-1 rounded-full font-bold shadow-sm mb-3">SMART INFO</span>
+                    <h2 class="text-3xl font-bold text-slate-800">학생 맞춤형 현지 정보</h2>
+                    <p class="text-sm text-slate-500 mt-2">여행 전 미리 알아보는 꿀팁! 용돈 계획과 옷차림을 준비해 보세요.</p>
+                </div>
+
+                <div class="max-w-5xl mx-auto space-y-8">
+                    
+                    <!-- 1. 여행 경비 & 환율 -->
+                    <div class="bg-white rounded-3xl shadow-md border border-slate-200 overflow-hidden">
+                        <div class="bg-blue-600 p-4 text-center">
+                            <h3 class="text-white font-bold text-lg"><i class="fa-solid fa-yen-sign mr-2"></i>여행 경비 꿀팁 & 체감 물가 계산기</h3>
+                        </div>
+                        <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                            <!-- 학생용 체감 물가 -->
+                            <div class="space-y-5">
+                                <h4 class="font-bold text-slate-800 text-lg border-b pb-2">🛍️ 옥동중 학생들을 위한 물가 안내</h4>
+                                
+                                <div class="flex items-start gap-3">
+                                    <div class="text-2xl mt-1">🏪</div>
+                                    <div>
+                                        <p class="font-bold text-slate-700">편의점 간식 (비슷하거나 저렴)</p>
+                                        <p class="text-sm text-slate-500 mt-1">삼각김밥 약 150엔(약 1,400원), 푸딩/빵류 약 150~200엔으로 한국 편의점과 비슷하거나 약간 저렴합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="text-2xl mt-1">🥤</div>
+                                    <div>
+                                        <p class="font-bold text-slate-700">길거리 자판기 음료</p>
+                                        <p class="text-sm text-slate-500 mt-1">대부분 140엔~180엔(약 1,300원~1,700원) 사이입니다. 잔돈(동전)을 사용하기 가장 좋습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="text-2xl mt-1">🎢</div>
+                                    <div>
+                                        <p class="font-bold text-slate-700">USJ (유니버셜 스튜디오) 굿즈</p>
+                                        <p class="text-sm text-slate-500 mt-1">테마파크 내 음식과 굿즈는 꽤 비쌉니다. 캐릭터 머리띠는 약 2,500엔~3,000엔(약 2만 5천원), 팝콘통은 4,000엔(약 3만 7천원) 정도 하니 용돈 계획을 잘 세우세요!</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 실시간 환율 계산기 -->
+                            <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 shadow-inner">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h4 class="font-bold text-blue-900 text-lg">엔화(¥) 간편 계산기</h4>
+                                    <span class="text-[10px] bg-blue-200 text-blue-800 px-2 py-1 rounded font-bold">오프라인 가능</span>
+                                </div>
+                                <p class="text-xs text-blue-600 mb-4">물건의 가격표(엔화)를 입력하면 대략적인 한국 돈으로 변환해 줍니다.</p>
+                                
+                                <div class="relative mb-4">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">¥</span>
+                                    <input type="number" id="jpy-input" oninput="calculateExchange()" placeholder="예: 1000" class="w-full pl-10 pr-4 py-4 rounded-xl border-2 border-blue-200 focus:border-blue-500 focus:outline-none text-lg font-bold text-slate-800 shadow-sm transition-all" inputmode="numeric">
+                                </div>
+                                
+                                <div class="text-center text-blue-300 my-2"><i class="fa-solid fa-arrow-down"></i></div>
+                                
+                                <div class="bg-slate-800 rounded-xl p-5 text-center shadow-md">
+                                    <p class="text-xs text-slate-300 mb-1">대략 한국 돈으로</p>
+                                    <p class="text-3xl font-black text-yellow-400" id="krw-output">0 <span class="text-lg font-bold text-white">원</span></p>
+                                </div>
+                                <p class="text-right text-[10px] text-slate-400 mt-2">※ 기준 환율: 100엔 = 약 920원 (어림값 적용)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. 날씨 & 옷차림 -->
+                    <div class="bg-white rounded-3xl shadow-md border border-slate-200 overflow-hidden">
+                        <div class="bg-amber-500 p-4 text-center">
+                            <h3 class="text-white font-bold text-lg"><i class="fa-solid fa-cloud-sun mr-2"></i>오사카 날씨 및 옷차림 가이드</h3>
+                        </div>
+                        <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                            
+                            <!-- 실시간 날씨 위젯 (Open-Meteo API) -->
+                            <div class="bg-slate-900 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+                                <div class="absolute -right-4 -top-4 text-slate-700 opacity-30 text-8xl"><i class="fa-solid fa-cloud"></i></div>
+                                <div class="relative z-10">
+                                    <p class="text-xs text-slate-400 font-bold mb-1 flex justify-between">
+                                        <span>LIVE 실시간 오사카 날씨</span>
+                                        <span id="weather-time">업데이트 중...</span>
+                                    </p>
+                                    <div class="flex items-end gap-3 mt-4 mb-6">
+                                        <span id="current-temp" class="text-5xl font-black tracking-tighter">--°C</span>
+                                        <span id="current-desc" class="text-lg font-medium text-slate-300 pb-1">--</span>
+                                        <span id="current-icon" class="text-4xl text-amber-400 ml-auto"><i class="fa-solid fa-spinner fa-spin"></i></span>
+                                    </div>
+                                    
+                                    <!-- 🚀 신규: 주간 날씨 예보 영역 추가 -->
+                                    <div id="weekly-forecast" class="flex gap-2 overflow-x-auto no-scrollbar py-3 border-t border-slate-700/50 mt-2 mb-4">
+                                        <div class="text-center text-xs text-slate-400 w-full py-2">일주일 날씨를 불러오는 중...</div>
+                                    </div>
+
+                                    <div class="bg-slate-800/80 rounded-xl p-3 border border-slate-700">
+                                        <p class="text-[11px] text-slate-300 leading-relaxed text-center">
+                                            ※ 위 날씨는 <strong class="text-amber-400">현재 시점</strong>의 오사카 실시간 기온입니다. 탐방 시기인 <strong class="text-white">10월 하순의 평균 기온은 15°C ~ 22°C</strong>로 선선한 가을 날씨가 예상됩니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 옷차림 조언 -->
+                            <div class="space-y-4 flex flex-col justify-center">
+                                <div class="flex items-start gap-3 bg-amber-50 p-4 rounded-xl border border-amber-100">
+                                    <div class="text-amber-500 text-2xl mt-1"><i class="fa-solid fa-layer-group"></i></div>
+                                    <div>
+                                        <p class="font-bold text-slate-800">얇은 옷 겹쳐 입기 (레이어드 필수)</p>
+                                        <p class="text-sm text-slate-600 mt-1">10월 말 오사카는 일교차가 큽니다. 두꺼운 외투 하나보다는 입고 벗기 편한 가디건, 바람막이, 후드집업 등을 여러 겹 챙겨주세요.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 bg-amber-50 p-4 rounded-xl border border-amber-100">
+                                    <div class="text-amber-500 text-2xl mt-1"><i class="fa-solid fa-shoe-prints"></i></div>
+                                    <div>
+                                        <p class="font-bold text-slate-800">무조건 편안한 운동화</p>
+                                        <p class="text-sm text-slate-600 mt-1">USJ와 교토 일정은 하루 평균 1만 보 이상 걷게 됩니다. 새 신발이나 구두는 절대 피하고, 가장 발이 편한 운동화를 착용하세요.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 bg-amber-50 p-4 rounded-xl border border-amber-100">
+                                    <div class="text-amber-500 text-2xl mt-1"><i class="fa-solid fa-umbrella"></i></div>
+                                    <div>
+                                        <p class="font-bold text-slate-800">접이식 우산 / 미니 우비</p>
+                                        <p class="text-sm text-slate-600 mt-1">갑작스러운 가을비나 USJ 어트랙션(워터월드 등) 탑승 시 옷이 젖는 것을 방지하기 위해 가벼운 우비나 작은 우산을 챙기면 좋습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 🚀 복원됨: Video Curation -->
         <section id="video" class="py-16 bg-slate-900">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-10 text-white">
@@ -626,7 +757,7 @@
                     </div>
                 </div>
 
-                <!-- T-Safe24 Protocol -->
+                <!-- 🚀 복원됨: T-Safe24 Protocol -->
                 <div class="text-center mb-10">
                     <h2 class="text-2xl md:text-3xl font-bold text-slate-800 flex items-center justify-center gap-2">
                         🚨 긴급상황 발생 시 대처방안
@@ -667,7 +798,7 @@
             </div>
         </section>
 
-        <!-- ESG Dashboard Section -->
+        <!-- 🚀 복원됨: ESG Dashboard Section -->
         <section id="esg" class="py-16 bg-emerald-50 border-t border-emerald-100 print:hidden">
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto">
@@ -741,9 +872,8 @@
     </div>
     <!-- END Screen Content Wrapper -->
 
-
     <!-- ========================================================================= -->
-    <!-- 🖨️ Print-Only Area (사북중학교 기본 일정표 양식) -->
+    <!-- 🖨️ 🚀 복원됨: Print-Only Area 전체 영역 복구 -->
     <!-- ========================================================================= -->
     <div id="print-area" class="hidden print:block w-full bg-white text-black py-4">
         
@@ -859,7 +989,7 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Tab UI Logic
+        // Tab & Share Logic
         function openTab(evt, tabId){
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -876,13 +1006,9 @@
         function shareLink(){
             const url = window.location.href;
             if (navigator.share) {
-                navigator.share({ 
-                    title: '[영월 옥동중학교] 오사카 해외문화탐방 제안서', 
-                    text: '학생과 학부모님을 위한 오사카/교토/USJ 3박 4일 탐방 일정 안내입니다.',
-                    url: url 
-                }).catch(()=>{});
+                navigator.share({ title: '[영월 옥동중학교] 오사카 탐방 안내', text: '학생과 학부모님을 위한 3박 4일 탐방 일정 및 준비물 안내입니다.', url: url }).catch(()=>{});
             } else {
-                navigator.clipboard?.writeText(url).then(()=>alert('제안서 링크가 복사되었습니다. 카카오톡 등으로 공유해주세요.'));
+                navigator.clipboard?.writeText(url).then(()=>alert('안내서 링크가 복사되었습니다. 카카오톡 등으로 공유해주세요.'));
             }
         }
 
@@ -950,7 +1076,103 @@
             window.addEventListener('resize', autoResize);
         })();
 
-        // Map Route & Layer Logic (애니메이션 동선 포함)
+        // 💰 환율 계산기 로직
+        function calculateExchange() {
+            const jpyInput = document.getElementById('jpy-input').value;
+            const krwOutput = document.getElementById('krw-output');
+            
+            // 2026년 기준 대략적인 적용 환율 (100엔 = 920원 가정 시, 1엔 = 9.2원)
+            // 학생들이 직관적으로 알 수 있도록 어림값 계산
+            const rate = 9.2; 
+            
+            if(jpyInput && jpyInput > 0) {
+                const krw = Math.round(jpyInput * rate);
+                krwOutput.innerHTML = krw.toLocaleString() + ' <span class="text-lg font-bold text-white">원</span>';
+            } else {
+                krwOutput.innerHTML = '0 <span class="text-lg font-bold text-white">원</span>';
+            }
+        }
+
+        // 🌤️ 실시간 날씨 및 주간 예보 API 연동 로직
+        function getWeatherIconAndDesc(code) {
+            let iconClass = "fa-solid fa-cloud-sun text-amber-400";
+            let desc = "맑음/구름조금";
+            if (code === 0) { iconClass = "fa-solid fa-sun text-yellow-400"; desc = "맑음"; }
+            else if (code >= 1 && code <= 3) { iconClass = "fa-solid fa-cloud-sun text-amber-400"; desc = "구름조금"; }
+            else if (code >= 45 && code <= 48) { iconClass = "fa-solid fa-smog text-slate-400"; desc = "안개"; }
+            else if (code >= 51 && code <= 67) { iconClass = "fa-solid fa-cloud-rain text-blue-400"; desc = "비"; }
+            else if (code >= 71 && code <= 77) { iconClass = "fa-solid fa-snowflake text-sky-300"; desc = "눈"; }
+            else if (code >= 80 && code <= 82) { iconClass = "fa-solid fa-cloud-showers-heavy text-blue-500"; desc = "소나기"; }
+            else if (code >= 95) { iconClass = "fa-solid fa-cloud-bolt text-purple-500"; desc = "천둥번개"; }
+            return { iconClass, desc };
+        }
+
+        async function fetchOsakaWeather() {
+            try {
+                // Open-Meteo 무료 API 호출 (+ daily 파라미터 추가하여 최고/최저 기온 및 날씨코드 호출)
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=34.6937&longitude=135.5023&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo');
+                const data = await res.json();
+                
+                // 1. 현재 날씨 세팅
+                const weather = data.current_weather;
+                const temp = Math.round(weather.temperature);
+                const code = weather.weathercode;
+                const currentInfo = getWeatherIconAndDesc(code);
+
+                // DOM 업데이트 (현재)
+                document.getElementById('current-temp').innerText = `${temp}°C`;
+                document.getElementById('current-desc').innerText = currentInfo.desc;
+                document.getElementById('current-icon').innerHTML = `<i class="${currentInfo.iconClass}"></i>`;
+                
+                // 업데이트 시간 표시
+                const now = new Date();
+                const timeStr = `${now.getMonth()+1}.${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')} 기준`;
+                document.getElementById('weather-time').innerText = timeStr;
+
+                // 2. 주간 날씨 예보 세팅 (가로 스크롤 형태)
+                const daily = data.daily;
+                let forecastHTML = '';
+                const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+                
+                for(let i=0; i<7; i++) {
+                    const dateStr = daily.time[i]; 
+                    const maxT = Math.round(daily.temperature_2m_max[i]);
+                    const minT = Math.round(daily.temperature_2m_min[i]);
+                    const wCode = daily.weathercode[i];
+                    
+                    const dateObj = new Date(dateStr);
+                    const month = dateObj.getMonth() + 1;
+                    const date = dateObj.getDate();
+                    const dayOfWeek = daysOfWeek[dateObj.getDay()];
+                    
+                    const info = getWeatherIconAndDesc(wCode);
+                    
+                    forecastHTML += `
+                        <div class="flex-shrink-0 w-16 bg-slate-800/60 rounded-xl py-2 flex flex-col items-center border border-slate-700/50 shadow-sm">
+                            <span class="text-[10px] text-slate-400 font-bold mb-1">${month}/${date}(${dayOfWeek})</span>
+                            <span class="text-xl mb-1"><i class="${info.iconClass}"></i></span>
+                            <span class="text-[10px] font-bold tracking-tighter"><span class="text-sky-400">${minT}</span><span class="text-slate-600 mx-0.5">/</span><span class="text-red-400">${maxT}</span></span>
+                        </div>
+                    `;
+                }
+                document.getElementById('weekly-forecast').innerHTML = forecastHTML;
+                
+            } catch (error) {
+                console.error("날씨 정보를 불러오는 데 실패했습니다.", error);
+                document.getElementById('current-temp').innerText = "-°C";
+                document.getElementById('current-desc').innerText = "정보 없음";
+                document.getElementById('current-icon').innerHTML = `<i class="fa-solid fa-cloud text-slate-500"></i>`;
+                document.getElementById('weather-time').innerText = "네트워크 오류";
+                if(document.getElementById('weekly-forecast')) {
+                    document.getElementById('weekly-forecast').innerHTML = '<div class="text-center text-xs text-red-400 w-full py-2">날씨 정보를 가져올 수 없습니다.</div>';
+                }
+            }
+        }
+        
+        // 페이지 로드 시 날씨 호출
+        document.addEventListener('DOMContentLoaded', fetchOsakaWeather);
+
+        // Map Route Logic
         let map;
         let mapLayers = [];
 
@@ -1054,25 +1276,20 @@
             if(mapInited || !window.L) return;
             mapInited = true;
             map = L.map('map', { scrollWheelZoom:false });
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap &copy; CARTO',
-                maxZoom: 19
-            }).addTo(map);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
             drawMap('all');
         }
 
-        // D-Day Logic (본행사 10월 20일 기준)
+        const io = new IntersectionObserver((entries)=>{
+            if(entries[0].isIntersecting) { initMap(); io.disconnect(); }
+        }, { threshold: 0.1 });
+        io.observe(document.getElementById('map-section'));
+
         const depart = new Date('2026-10-20');
         const diff = Math.ceil((depart - new Date()) / (1000*60*60*24));
         const badge = document.getElementById('d-day-badge');
         badge.textContent = diff > 0 ? `D-${diff}` : (diff === 0 ? 'D-DAY' : `D+${Math.abs(diff)}`);
         badge.classList.remove('hidden');
-
-        // Lazy load map
-        const io = new IntersectionObserver((entries)=>{
-            if(entries[0].isIntersecting) { initMap(); io.disconnect(); }
-        }, { threshold: 0.1 });
-        io.observe(document.getElementById('map-section'));
     </script>
 </body>
 </html>

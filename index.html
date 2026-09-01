@@ -22,8 +22,9 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Leaflet CSS (Map) -->
+    <!-- Leaflet + OpenFreeMap (고한중과 동일한 밝은 지도, 키 없음) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
@@ -41,6 +42,35 @@
         @media (max-width: 768px){ .hero-bg { background-attachment: scroll; } }
         
         #map { height: 500px; width: 100%; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); z-index: 10; }
+        .leaflet-maplibre-gl { z-index: 0 !important; }
+        .custom-icon { background: transparent; border: none; }
+        .map-pin-wrap { display: flex; flex-direction: column; align-items: center; }
+        .map-pin-dot {
+            width: 30px; height: 30px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; color: #fff;
+            border: 2px solid rgba(255,255,255,0.95);
+            box-shadow: 0 8px 16px rgba(15,23,42,0.18);
+        }
+        .map-pin-label {
+            margin-top: 3px;
+            background: rgba(255,255,255,0.96);
+            color: #0f172a;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.2;
+            padding: 2px 6px;
+            border-radius: 6px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(15,23,42,0.12);
+        }
+        .map-bus {
+            font-size: 22px;
+            line-height: 1;
+            filter: drop-shadow(0 4px 8px rgba(15,23,42,0.35));
+        }
+        @media (max-width: 768px) { #map { height: 440px; } }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
         .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
@@ -240,19 +270,23 @@
                 <div class="text-center mb-8">
                     <span class="text-indigo-600 font-black tracking-widest text-xs uppercase">ANIMATED ROUTING MAP</span>
                     <h2 class="text-3xl font-bold text-slate-800 mt-2">한눈에 보는 탐방 동선</h2>
-                    <p class="text-slate-500 mt-2 text-sm">일자별 버튼을 클릭하시면 세부 이동 경로가 표시됩니다.</p>
+                    <p class="text-slate-500 mt-2 text-sm md:text-base">실제 도로를 따라 이동 순서가 천천히 그려집니다. 일자 버튼을 누르면 해당 구간만 볼 수 있습니다.</p>
                 </div>
 
-                <div class="flex flex-wrap justify-center gap-2 mb-6 px-2" id="map-controls">
+                <div class="flex flex-wrap justify-center gap-2 mb-3 px-2" id="map-controls">
                     <button onclick="changeMapRoute('all')" class="map-btn active px-5 py-2 rounded-full border border-slate-300 bg-slate-800 text-white text-sm font-bold transition shadow-md">전체 여정</button>
-                    <button onclick="changeMapRoute('day1')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">1일차</button>
-                    <button onclick="changeMapRoute('day2')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">2일차</button>
-                    <button onclick="changeMapRoute('day3')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">3일차</button>
-                    <button onclick="changeMapRoute('day4')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">4일차</button>
+                    <button onclick="changeMapRoute('day1')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">1일차(고베)</button>
+                    <button onclick="changeMapRoute('day2')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">2일차(교토)</button>
+                    <button onclick="changeMapRoute('day3')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">3일차(나라)</button>
+                    <button onclick="changeMapRoute('day4')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">4일차(귀국)</button>
                 </div>
+                <p id="map-hint" class="text-center text-xs text-slate-500 mb-4 font-medium">전체 여정 — 간사이 도착부터 귀국까지 실제 도로 동선</p>
 
-                <div class="max-w-5xl mx-auto border border-slate-200 rounded-2xl p-1 shadow-lg bg-white relative z-10">
+                <div class="max-w-5xl mx-auto border border-slate-200 rounded-2xl p-1 shadow-lg bg-white relative">
                     <div id="map"></div>
+                    <div id="map-status" class="absolute top-4 left-4 z-[400] bg-white/90 backdrop-blur px-3 py-1.5 rounded-xl shadow font-bold text-xs text-slate-700 pointer-events-none">
+                        <i class="fa-solid fa-route text-indigo-500 mr-1"></i><span id="map-status-text">실제 도로 동선</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -287,7 +321,7 @@
                                 <span class="text-4xl bg-blue-100 p-4 rounded-2xl text-blue-700"><i class="fa-solid fa-anchor"></i></span>
                                 <div>
                                     <h3 class="font-bold text-2xl text-slate-800">낭만적인 항구도시, 고베</h3>
-                                    <p class="text-blue-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 청주 → 간사이공항 → 고베 → 오사카</p>
+                                    <p class="text-blue-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 청주 → 간사이공항 → 롯코산 → 기타노이진칸 → 하버랜드 → 오사카</p>
                                 </div>
                             </div>
                             <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8">
@@ -303,8 +337,8 @@
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-blue-500 ring-blue-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🌊 메리켄파크 (고베 지진 메모리얼파크)</h4>
-                                    <p class="text-slate-600 text-sm mt-2">고베 지진을 추모하고 기억하는 메모리얼파크를 둘러보며 재난 안전의 중요성을 확인합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🏡 기타노이진칸</h4>
+                                    <p class="text-slate-600 text-sm mt-2">고베 산노미야 언덕의 이국적인 서양관 거리, 기타노이진칸을 둘러봅니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-blue-500 ring-blue-100"></div>
@@ -827,7 +861,7 @@
                         ■ 청주국제공항 출발 (에어로케이 RF312 08:15) ✈️ 간사이공항 도착 (09:55)<br>
                         ■ 입국 수속 및 스루가이드 미팅 후 고베로 이동<br>
                         ■ <strong style="color: #004098;">롯코산 (케이블카 탑승)</strong> 및 가든테라스 관광<br>
-                        ■ <strong style="color: #004098;">메모리얼파크 (메리켄파크)</strong> 관람<br>
+                        ■ <strong style="color: #004098;">기타노이진칸</strong> 관람<br>
                         ■ <strong style="color: #004098;">고베 하버랜드</strong> 산책<br>
                         ■ 오사카 이동 후 석식 진행 및 호텔 투숙<br>
                         *HOTEL: 사라사 호텔 도톤보리 (또는 동급)
@@ -904,6 +938,8 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.20/leaflet-maplibre-gl.js"></script>
     <script>
         // -----------------------------------------
         // 1. D-Day 및 동적 타이틀 로직 (행사일: 26.10.20 ~ 26.10.23)
@@ -1057,123 +1093,310 @@
         document.addEventListener('DOMContentLoaded', fetchOsakaWeather);
 
         // -----------------------------------------
-        // 6. Map Logic (지도 5원칙 적용)
+        // 6. Map Logic — OSRM 실제 도로 + 순차 재생 (고한중 품질)
         // -----------------------------------------
         let map;
-        let layerGroup; // 마커 및 폴리라인 관리용
+        let mapLayers = [];
+        let mapDrawSeq = 0;
+        let activeBus = null;
         let mapInited = false;
-
-        const spots = {
-            kix: { coords: [34.4320, 135.2304], title: "간사이 공항", color: "#64748b", icon: "✈️" },
-            rokko: { coords: [34.7644, 135.2477], title: "고베 롯코산", color: "#4f46e5", icon: "🚠" },
-            kobe_port: { coords: [34.6826, 135.1867], title: "고베 (메모리얼파크)", color: "#4f46e5", icon: "⚓" },
-            hotel: { coords: [34.6672, 135.5061], title: "사라사 호텔 도톤보리", color: "#1e293b", icon: "🏨" },
-            kyoto_doshisha: { coords: [35.0298, 135.7603], title: "도시샤 대학", color: "#d97706", icon: "🎓" },
-            kyoto_mimizuka: { coords: [34.9914, 135.7725], title: "이총 (귀무덤)", color: "#d97706", icon: "🪦" },
-            kyoto_kiyomizu: { coords: [34.9948, 135.7850], title: "청수사(기요미즈데라)", color: "#d97706", icon: "⛩️" },
-            kyoto_arashi: { coords: [35.0134, 135.6770], title: "아라시야마", color: "#d97706", icon: "🎋" },
-            nara_park: { coords: [34.6851, 135.8487], title: "사슴공원(나라)", color: "#db2777", icon: "🦌" },
-            todaiji: { coords: [34.6914, 135.8450], title: "동대사(토다이지)", color: "#db2777", icon: "⛩️" },
-            osaka_castle: { coords: [34.6873, 135.5250], title: "오사카성", color: "#db2777", icon: "🏯" },
-            dotonbori: { coords: [34.6683, 135.5012], title: "도톤보리 시내", color: "#db2777", icon: "🍜" },
+        const osrmCache = {};
+        const mapHints = {
+            all: '전체 여정 — 간사이 도착부터 귀국까지 실제 도로 동선',
+            day1: '1일차 — 간사이공항 → 롯코산 → 기타노이진칸 → 하버랜드 → 도톤보리 호텔',
+            day2: '2일차 — 호텔 → 도시샤대학 → 이총 → 기요미즈데라 → 아라시야마 → 오사카 귀환',
+            day3: '3일차 — 호텔 → 나라 사슴공원/동대사 → 오사카성 → 도톤보리',
+            day4: '4일차 — 호텔 → 간사이공항 귀국'
         };
-
+        const spots = {
+            kix: { coords: [34.4320, 135.2304], title: '간사이 공항', color: '#64748b', icon: '✈️' },
+            rokko: { coords: [34.7644, 135.2477], title: '고베 롯코산', color: '#4f46e5', icon: '🚠' },
+            kitano: { coords: [34.7014, 135.1903], title: '기타노이진칸', color: '#4f46e5', icon: '🏡' },
+            harborland: { coords: [34.6792, 135.1865], title: '고베 하버랜드', color: '#4f46e5', icon: '🎡' },
+            hotel: { coords: [34.6672, 135.5061], title: '사라사 도톤보리', color: '#1e293b', icon: '🏨' },
+            kyoto_doshisha: { coords: [35.0298, 135.7603], title: '도시샤 대학', color: '#d97706', icon: '🎓' },
+            kyoto_mimizuka: { coords: [34.9914, 135.7725], title: '이총 (귀무덤)', color: '#d97706', icon: '🪦' },
+            kyoto_kiyomizu: { coords: [34.9948, 135.7850], title: '기요미즈데라', color: '#d97706', icon: '⛩️' },
+            kyoto_arashi: { coords: [35.0134, 135.6770], title: '아라시야마', color: '#d97706', icon: '🎋' },
+            nara_park: { coords: [34.6851, 135.8487], title: '사슴공원(나라)', color: '#db2777', icon: '🦌' },
+            todaiji: { coords: [34.6914, 135.8450], title: '동대사(토다이지)', color: '#db2777', icon: '⛩️' },
+            osaka_castle: { coords: [34.6873, 135.5250], title: '오사카성', color: '#db2777', icon: '🏯' },
+            dotonbori: { coords: [34.6683, 135.5012], title: '도톤보리 시내', color: '#db2777', icon: '🍜' }
+        };
         const routes = {
             all: {
-                points: ['kix', 'rokko', 'kobe_port', 'hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori'],
+                points: ['kix', 'rokko', 'kitano', 'harborland', 'hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori'],
+                maxZoom: 9,
                 lines: [
-                    { latlngs: [spots.kix.coords, [34.580, 135.440], [34.640, 135.430], [34.700, 135.350], spots.rokko.coords, spots.kobe_port.coords, spots.hotel.coords], color: '#4f46e5' },
-                    { latlngs: [spots.hotel.coords, spots.kyoto_doshisha.coords, spots.kyoto_mimizuka.coords, spots.kyoto_kiyomizu.coords, spots.kyoto_arashi.coords, spots.hotel.coords], color: '#d97706' },
-                    { latlngs: [spots.hotel.coords, spots.nara_park.coords, spots.todaiji.coords, spots.osaka_castle.coords, spots.dotonbori.coords, spots.hotel.coords], color: '#db2777' },
-                    { latlngs: [spots.hotel.coords, [34.580, 135.440], spots.kix.coords], color: '#64748b' }
+                    { pts: ['kix', 'rokko', 'kitano', 'harborland', 'hotel'], color: '#4f46e5' },
+                    { pts: ['hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi', 'hotel'], color: '#d97706' },
+                    { pts: ['hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori', 'hotel'], color: '#db2777' },
+                    { pts: ['hotel', 'kix'], color: '#64748b' }
                 ]
             },
             day1: {
-                points: ['kix', 'rokko', 'kobe_port', 'hotel'],
-                lines: [{ latlngs: [spots.kix.coords, [34.580, 135.440], [34.640, 135.430], [34.700, 135.350], spots.rokko.coords, spots.kobe_port.coords, spots.hotel.coords], color: '#4f46e5' }]
+                points: ['kix', 'rokko', 'kitano', 'harborland', 'hotel'],
+                maxZoom: 11,
+                lines: [{ pts: ['kix', 'rokko', 'kitano', 'harborland', 'hotel'], color: '#4f46e5' }]
             },
             day2: {
                 points: ['hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi'],
-                lines: [{ latlngs: [spots.hotel.coords, spots.kyoto_doshisha.coords, spots.kyoto_mimizuka.coords, spots.kyoto_kiyomizu.coords, spots.kyoto_arashi.coords, spots.hotel.coords], color: '#d97706' }]
+                maxZoom: 12,
+                lines: [{ pts: ['hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi', 'hotel'], color: '#d97706' }]
             },
             day3: {
                 points: ['hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori'],
-                lines: [{ latlngs: [spots.hotel.coords, spots.nara_park.coords, spots.todaiji.coords, spots.osaka_castle.coords, spots.dotonbori.coords, spots.hotel.coords], color: '#db2777' }]
+                maxZoom: 11,
+                lines: [{ pts: ['hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori', 'hotel'], color: '#db2777' }]
             },
             day4: {
                 points: ['hotel', 'kix'],
-                lines: [{ latlngs: [spots.hotel.coords, [34.580, 135.440], spots.kix.coords], color: '#64748b' }]
+                maxZoom: 11,
+                lines: [{ pts: ['hotel', 'kix'], color: '#64748b' }]
             }
         };
 
-        function drawMap(routeKey) {
-            if (!map) return;
-            // 지도 5원칙 4. 탭전환: layerGroup.clearLayers() 선행 필수
-            layerGroup.clearLayers();
-            
-            const routeData = routes[routeKey];
-            
-            // 지도 5원칙 3. 선 애니메이션 적용
-            routeData.lines.forEach((lineDef) => {
-                const polyline = L.polyline(lineDef.latlngs, { color: lineDef.color, weight: 4, opacity: 0.8 }).addTo(layerGroup);
-                setTimeout(() => {
-                    const path = polyline.getElement();
-                    if (path) { 
-                        const length = path.getTotalLength();
-                        path.style.transition = 'none';
-                        path.style.strokeDasharray = length + ' ' + length;
-                        path.style.strokeDashoffset = length;
-                        path.getBoundingClientRect(); // 리플로우 강제
-                        path.style.transition = 'stroke-dashoffset 2s ease-in-out';
-                        path.style.strokeDashoffset = '0';
-                    }
-                }, 50);
+        function isMobileView() {
+            return window.matchMedia('(max-width: 768px)').matches;
+        }
+        function setMapStatus(text) {
+            const el = document.getElementById('map-status-text');
+            if (el) el.textContent = text;
+        }
+        function pinIcon(spot) {
+            return L.divIcon({
+                className: 'custom-icon',
+                html: `<div class="map-pin-wrap">
+                    <div class="map-pin-dot" style="background:${spot.color};">${spot.icon}</div>
+                    <span class="map-pin-label">${spot.title}</span>
+                </div>`,
+                iconSize: [108, 52],
+                iconAnchor: [54, 16]
             });
-
-            // 지도 5원칙 1 & 5. 마커 애니메이션 및 툴팁
-            let bounds = L.latLngBounds();
-            routeData.points.forEach((key, idx) => {
-                const spot = spots[key];
-                const iconHtml = `<div class="map-marker-anim" style="animation: popIn 0.5s forwards; animation-delay: ${idx * 0.2}s; background-color:${spot.color}; width:28px; height:28px; border-radius:50%; border:2px solid white; color:white; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:12px; box-shadow:0 2px 5px rgba(0,0,0,0.3);">${spot.icon}</div>`;
-                const icon = L.divIcon({ className: 'custom-icon', html: iconHtml, iconSize: [28, 28] });
-                
-                L.marker(spot.coords, {icon: icon})
-                 .bindTooltip(`<b>${spot.title}</b>`, {direction: 'top', offset: [0, -10]})
-                 .addTo(layerGroup);
-                
-                bounds.extend(spot.coords);
+        }
+        function busIcon() {
+            return L.divIcon({
+                className: 'custom-icon',
+                html: '<div class="map-bus">🚌</div>',
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
             });
-            
-            // 지도 5원칙 2. 안정화: fitBounds 후 대기
-            setTimeout(() => {
-                map.fitBounds(bounds, { padding: [50, 50], maxZoom: 11 });
-            }, 300);
+        }
+        function headingDeg(from, to) {
+            return Math.atan2(to[1] - from[1], to[0] - from[0]) * 180 / Math.PI;
+        }
+        function setBusHeading(marker, from, to) {
+            const el = marker && marker.getElement();
+            const icon = el && el.querySelector('.map-bus');
+            if (!icon) return;
+            icon.style.transform = `rotate(${headingDeg(from, to)}deg)`;
+            icon.style.transformOrigin = 'center';
+        }
+        function clearMapLayers() {
+            if (activeBus) activeBus._aborted = true;
+            activeBus = null;
+            mapLayers.forEach(layer => {
+                if (layer._aborted !== undefined) layer._aborted = true;
+                map.removeLayer(layer);
+            });
+            mapLayers = [];
+        }
+        async function roadPath(pts) {
+            const key = pts.map(p => p.join(',')).join('|');
+            if (osrmCache[key]) return osrmCache[key];
+            try {
+                const coords = pts.map(p => `${p[1]},${p[0]}`).join(';');
+                const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`);
+                const data = await res.json();
+                if (data.code === 'Ok' && data.routes && data.routes[0]) {
+                    const path = data.routes[0].geometry.coordinates.map(([lng, lat]) => [lat, lng]);
+                    osrmCache[key] = path;
+                    return path;
+                }
+            } catch (e) { /* fall back to straight line */ }
+            return pts;
+        }
+        function lineDuration(pixelLength, routeKey) {
+            const mobile = isMobileView();
+            const allView = routeKey === 'all';
+            const min = mobile ? (allView ? 1800 : 2800) : (allView ? 1000 : 1400);
+            const max = mobile ? (allView ? 3200 : 5600) : (allView ? 1800 : 2800);
+            const pxPerMs = mobile ? (allView ? 0.2 : 0.12) : 0.28;
+            return Math.max(min, Math.min(max, pixelLength / pxPerMs));
+        }
+        function whenPathReady(polyline) {
+            return new Promise(resolve => {
+                let tries = 24;
+                const tick = () => {
+                    const el = polyline.getElement();
+                    if (el && typeof el.getTotalLength === 'function') resolve(el);
+                    else if (tries-- > 0) requestAnimationFrame(tick);
+                    else resolve(null);
+                };
+                requestAnimationFrame(tick);
+            });
+        }
+        function animateLine(polyline, duration) {
+            return new Promise(async resolve => {
+                const path = await whenPathReady(polyline);
+                if (!path) { resolve(duration); return; }
+                const length = path.getTotalLength();
+                const ms = duration || 1400;
+                path.style.transition = 'none';
+                path.style.strokeDasharray = length + ' ' + length;
+                path.style.strokeDashoffset = String(length);
+                path.getBoundingClientRect();
+                path.style.transition = `stroke-dashoffset ${ms}ms ease-in-out`;
+                path.style.strokeDashoffset = '0';
+                setTimeout(() => resolve(ms), ms + 40);
+            });
+        }
+        function moveMarkerAlong(marker, latlngs, duration) {
+            return new Promise(resolve => {
+                if (!marker || !latlngs || latlngs.length < 2) { resolve(); return; }
+                const dists = [0];
+                let total = 0;
+                for (let i = 1; i < latlngs.length; i++) {
+                    total += L.latLng(latlngs[i - 1]).distanceTo(L.latLng(latlngs[i]));
+                    dists.push(total);
+                }
+                if (total === 0) { resolve(); return; }
+                const start = performance.now();
+                const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+                function frame(now) {
+                    if (marker._aborted) { resolve(); return; }
+                    const t = Math.min(1, (now - start) / duration);
+                    const target = total * ease(t);
+                    let i = 1;
+                    while (i < dists.length && dists[i] < target) i++;
+                    const a = latlngs[i - 1];
+                    const b = latlngs[Math.min(i, latlngs.length - 1)];
+                    const span = (dists[i] - dists[i - 1]) || 1;
+                    const f = (target - dists[i - 1]) / span;
+                    marker.setLatLng([a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]);
+                    setBusHeading(marker, a, b);
+                    if (t < 1) requestAnimationFrame(frame);
+                    else resolve();
+                }
+                requestAnimationFrame(frame);
+            });
         }
 
-        function changeMapRoute(dayKey) {
+        async function drawMap(routeKey) {
+            if (!map) return;
+            const seq = ++mapDrawSeq;
+            clearMapLayers();
+            const routeData = routes[routeKey] || routes.all;
+            const hint = mapHints[routeKey] || mapHints.all;
+            const hintEl = document.getElementById('map-hint');
+            if (hintEl) hintEl.textContent = hint;
+            setMapStatus('실제 도로 동선을 불러오는 중...');
+
+            const bounds = L.latLngBounds(routeData.points.map(key => spots[key].coords));
+            map.fitBounds(bounds, { padding: [50, 50], maxZoom: routeData.maxZoom || 11 });
+            setTimeout(() => map.invalidateSize(), 120);
+
+            const legs = [];
+            routeData.lines.forEach(lineDef => {
+                for (let i = 0; i < lineDef.pts.length - 1; i++) {
+                    legs.push({ from: lineDef.pts[i], to: lineDef.pts[i + 1], color: lineDef.color });
+                }
+            });
+            const paths = await Promise.all(legs.map(leg => roadPath([spots[leg.from].coords, spots[leg.to].coords])));
+            if (seq !== mapDrawSeq) return;
+
+            paths.forEach(path => path.forEach(pt => bounds.extend(pt)));
+            map.fitBounds(bounds, { padding: [50, 50], maxZoom: routeData.maxZoom || 11 });
+            await new Promise(r => setTimeout(r, 280));
+            if (seq !== mapDrawSeq) return;
+
+            const ghost = L.polyline(paths.flat(), { color: '#94a3b8', weight: 4, opacity: 0.22, lineJoin: 'round', lineCap: 'round' }).addTo(map);
+            mapLayers.push(ghost);
+
+            const placed = new Set();
+            const addPin = (key) => {
+                if (placed.has(key)) return;
+                placed.add(key);
+                const spot = spots[key];
+                const marker = L.marker(spot.coords, { icon: pinIcon(spot), zIndexOffset: 200 })
+                    .addTo(map)
+                    .bindPopup(`<b>${spot.title}</b>`);
+                mapLayers.push(marker);
+            };
+            addPin(legs[0].from);
+
+            const bus = L.marker(spots[legs[0].from].coords, { icon: busIcon(), zIndexOffset: 900 }).addTo(map);
+            bus._aborted = false;
+            activeBus = bus;
+            mapLayers.push(bus);
+
+            for (let i = 0; i < legs.length; i++) {
+                if (seq !== mapDrawSeq) return;
+                const leg = legs[i];
+                const path = paths[i];
+                setMapStatus(`${spots[leg.from].title} → ${spots[leg.to].title}`);
+                const poly = L.polyline(path, { color: leg.color, weight: 5, opacity: 0.95, lineJoin: 'round', lineCap: 'round' }).addTo(map);
+                mapLayers.push(poly);
+                const ready = await whenPathReady(poly);
+                const ms = lineDuration(ready ? ready.getTotalLength() : 400, routeKey);
+                await Promise.all([
+                    animateLine(poly, ms),
+                    moveMarkerAlong(bus, path, ms)
+                ]);
+                if (seq !== mapDrawSeq) return;
+                addPin(leg.to);
+                await new Promise(r => setTimeout(r, isMobileView() ? 280 : 140));
+            }
+            if (seq !== mapDrawSeq) return;
+            setMapStatus(hint);
+            if (bus && map.hasLayer(bus)) map.removeLayer(bus);
+            mapLayers = mapLayers.filter(layer => layer !== bus);
+            if (activeBus === bus) activeBus = null;
+            setTimeout(() => map.invalidateSize(), 160);
+        }
+
+        function setMapTab(dayKey) {
             document.querySelectorAll('.map-btn').forEach(btn => {
                 btn.classList.remove('active', 'bg-slate-800', 'text-white', 'shadow-md');
                 btn.classList.add('bg-white', 'text-slate-600');
             });
             const clickedBtn = document.querySelector(`.map-btn[onclick="changeMapRoute('${dayKey}')"]`);
-            if(clickedBtn){
+            if (clickedBtn) {
                 clickedBtn.classList.add('active', 'bg-slate-800', 'text-white', 'shadow-md');
                 clickedBtn.classList.remove('bg-white', 'text-slate-600');
+            }
+        }
+
+        function changeMapRoute(dayKey) {
+            setMapTab(dayKey);
+            if (!map) {
+                initMap(dayKey);
+                return;
             }
             drawMap(dayKey);
         }
 
-        function initMap(){
-            if(mapInited || !window.L) return;
+        function initMap(initialKey) {
+            if (mapInited || !window.L) return;
             mapInited = true;
-            map = L.map('map', { scrollWheelZoom:false });
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
-            layerGroup = L.layerGroup().addTo(map);
-            drawMap('all');
+            map = L.map('map', { scrollWheelZoom: false });
+            if (typeof L.maplibreGL === 'function') {
+                L.maplibreGL({
+                    style: 'https://tiles.openfreemap.org/styles/positron'
+                }).addTo(map);
+            } else {
+                L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png', {
+                    maxZoom: 18,
+                    attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>'
+                }).addTo(map);
+            }
+            const startKey = initialKey || (isMobileView() ? 'day1' : 'all');
+            setMapTab(startKey);
+            drawMap(startKey);
         }
 
-        const io = new IntersectionObserver((entries)=>{
-            if(entries[0].isIntersecting) { initMap(); io.disconnect(); }
+        const io = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) { initMap(); io.disconnect(); }
         }, { threshold: 0.1 });
         io.observe(document.getElementById('map-section'));
 

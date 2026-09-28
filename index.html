@@ -276,8 +276,8 @@
                 <div class="flex flex-wrap justify-center gap-2 mb-3 px-2" id="map-controls">
                     <button onclick="changeMapRoute('all')" class="map-btn active px-5 py-2 rounded-full border border-slate-300 bg-slate-800 text-white text-sm font-bold transition shadow-md">전체 여정</button>
                     <button onclick="changeMapRoute('day1')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">1일차(고베)</button>
-                    <button onclick="changeMapRoute('day2')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">2일차(교토)</button>
-                    <button onclick="changeMapRoute('day3')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">3일차(나라)</button>
+                    <button onclick="changeMapRoute('day2')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">2일차(나라)</button>
+                    <button onclick="changeMapRoute('day3')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">3일차(교토)</button>
                     <button onclick="changeMapRoute('day4')" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">4일차(귀국)</button>
                 </div>
                 <p id="map-hint" class="text-center text-xs text-slate-500 mb-4 font-medium">전체 여정 — 간사이 도착부터 귀국까지 실제 도로 동선</p>
@@ -356,6 +356,44 @@
                         <!-- Day 2 -->
                         <div id="day2" class="tab-content hidden animate-fade-in-up p-6 md:p-10">
                             <div class="flex items-center gap-4 mb-8 border-b pb-6">
+                                <span class="text-4xl bg-pink-100 p-4 rounded-2xl text-pink-700"><i class="fa-solid fa-landmark"></i></span>
+                                <div>
+                                    <h3 class="font-bold text-2xl text-slate-800">나라 사슴공원 및 도심 자율 탐방</h3>
+                                    <p class="text-pink-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 오사카 → 나라 → 오사카 (도톤보리)</p>
+                                </div>
+                            </div>
+                            <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8">
+                                <div class="relative">
+                                    <div class="timeline-dot bg-pink-600 ring-pink-100"></div>
+                                    <h4 class="font-bold text-lg text-slate-800">🦌 나라 이동 후 사슴공원/동대사 관람</h4>
+                                    <p class="text-slate-600 text-sm mt-2">호텔 조식 후 나라로 이동하여, 대규모 목조 사찰인 동대사(도다이지)와 사슴공원을 여유롭게 관람합니다.</p>
+                                </div>
+                                <div class="relative">
+                                    <div class="timeline-dot bg-pink-500 ring-pink-100"></div>
+                                    <h4 class="font-bold text-lg text-slate-800">🍽️ 중식: 현지식</h4>
+                                    <p class="text-slate-600 text-sm mt-2">현지식으로 중식을 든든히 진행합니다.</p>
+                                </div>
+                                <div class="relative">
+                                    <div class="timeline-dot bg-pink-500 ring-pink-100"></div>
+                                    <h4 class="font-bold text-lg text-slate-800">🏯 오사카 복귀 후 오사카성 관람</h4>
+                                    <p class="text-slate-600 text-sm mt-2">오사카로 복귀하여 일본 3대 명성 중 하나인 오사카성을 관람합니다 (천수각 불포함).</p>
+                                </div>
+                                <div class="relative">
+                                    <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
+                                    <h4 class="font-bold text-lg text-slate-800">🌃 신사이바시 및 도톤보리 자유시간</h4>
+                                    <p class="text-slate-500 text-sm mt-2">오사카 시내 최대 번화가에서 도심 상권 탐방과 개별 활동이 가능한 자유시간을 가집니다.</p>
+                                </div>
+                                <div class="relative">
+                                    <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
+                                    <h4 class="font-bold text-lg text-slate-800">🍜 자율 석식 (인당 ¥3,000 제공)</h4>
+                                    <p class="text-slate-500 text-sm mt-2">제공된 예산으로 현지 맛집을 자율적으로 경험한 후 호텔로 복귀하여 투숙합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Day 3 -->
+                        <div id="day3" class="tab-content hidden animate-fade-in-up p-6 md:p-10">
+                            <div class="flex items-center gap-4 mb-8 border-b pb-6">
                                 <span class="text-4xl bg-amber-100 p-4 rounded-2xl text-amber-700"><i class="fa-solid fa-torii-gate"></i></span>
                                 <div>
                                     <h3 class="font-bold text-2xl text-slate-800">역사와 문학이 숨쉬는 교토</h3>
@@ -393,44 +431,6 @@
                                     <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
                                     <h4 class="font-bold text-lg text-slate-800">🏨 오사카 귀환 및 석식</h4>
                                     <p class="text-slate-500 text-sm mt-2">오사카 복귀 후 현지식 석식을 진행하고 호텔에서 휴식합니다.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Day 3 -->
-                        <div id="day3" class="tab-content hidden animate-fade-in-up p-6 md:p-10">
-                            <div class="flex items-center gap-4 mb-8 border-b pb-6">
-                                <span class="text-4xl bg-pink-100 p-4 rounded-2xl text-pink-700"><i class="fa-solid fa-landmark"></i></span>
-                                <div>
-                                    <h3 class="font-bold text-2xl text-slate-800">나라 사슴공원 및 도심 자율 탐방</h3>
-                                    <p class="text-pink-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 오사카 → 나라 → 오사카 (도톤보리)</p>
-                                </div>
-                            </div>
-                            <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8">
-                                <div class="relative">
-                                    <div class="timeline-dot bg-pink-600 ring-pink-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🦌 나라 이동 후 사슴공원/동대사 관람</h4>
-                                    <p class="text-slate-600 text-sm mt-2">호텔 조식 후 나라로 이동하여, 대규모 목조 사찰인 동대사(도다이지)와 사슴공원을 여유롭게 관람합니다.</p>
-                                </div>
-                                <div class="relative">
-                                    <div class="timeline-dot bg-pink-500 ring-pink-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🍽️ 중식: 현지식</h4>
-                                    <p class="text-slate-600 text-sm mt-2">현지식으로 중식을 든든히 진행합니다.</p>
-                                </div>
-                                <div class="relative">
-                                    <div class="timeline-dot bg-pink-500 ring-pink-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🏯 오사카 복귀 후 오사카성 관람</h4>
-                                    <p class="text-slate-600 text-sm mt-2">오사카로 복귀하여 일본 3대 명성 중 하나인 오사카성을 관람합니다 (천수각 불포함).</p>
-                                </div>
-                                <div class="relative">
-                                    <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🌃 신사이바시 및 도톤보리 자유시간</h4>
-                                    <p class="text-slate-500 text-sm mt-2">오사카 시내 최대 번화가에서 도심 상권 탐방과 개별 활동이 가능한 자유시간을 가집니다.</p>
-                                </div>
-                                <div class="relative">
-                                    <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🍜 자율 석식 (인당 ¥3,000 제공)</h4>
-                                    <p class="text-slate-500 text-sm mt-2">제공된 예산으로 현지 맛집을 자율적으로 경험한 후 호텔로 복귀하여 투숙합니다.</p>
                                 </div>
                             </div>
                         </div>
@@ -876,24 +876,6 @@
                 <tr>
                     <td>2일차<br><span class="text-xs font-normal">(10.21)</span></td>
                     <td>
-                        ■ 호텔 조식 후 교토로 이동 (약 1시간 20분)<br>
-                        ■ <strong style="color: #004098;">도시샤 대학</strong> 탐방 및 시비 묵념<br>
-                        ■ <strong style="color: #004098;">이총 (귀무덤)</strong> 방문<br>
-                        ■ <strong style="color: #004098;">기요미즈데라(청수사)</strong> 관람<br>
-                        ■ <strong style="color: #004098;">산넨자카 / 니넨자카</strong> 거리 문화 체험<br>
-                        ■ <strong style="color: #004098;">아라시야마</strong> 탐방 (노노미야신사, 도게츠교, 치쿠린)<br>
-                        ■ 오사카 귀환 후 석식 및 호텔 휴식
-                    </td>
-                    <td>
-                        [조] 호텔식<br><br>
-                        [중] 현지식<br><br>
-                        [석] 현지식
-                    </td>
-                </tr>
-                <!-- Day 3 -->
-                <tr>
-                    <td>3일차<br><span class="text-xs font-normal">(10.22)</span></td>
-                    <td>
                         ■ 호텔 조식 후 나라로 이동 (약 1시간)<br>
                         ■ <strong style="color: #004098;">도다이지(동대사)</strong> 관람 및 <strong style="color: #004098;">사슴공원</strong> 체험<br>
                         ■ 현지식 중식 진행<br>
@@ -906,6 +888,24 @@
                         [조] 호텔식<br><br>
                         [중] 현지식<br><br>
                         [석] 자율식<br>(지원)
+                    </td>
+                </tr>
+                <!-- Day 3 -->
+                <tr>
+                    <td>3일차<br><span class="text-xs font-normal">(10.22)</span></td>
+                    <td>
+                        ■ 호텔 조식 후 교토로 이동 (약 1시간 20분)<br>
+                        ■ <strong style="color: #004098;">도시샤 대학</strong> 탐방 및 시비 묵념<br>
+                        ■ <strong style="color: #004098;">이총 (귀무덤)</strong> 방문<br>
+                        ■ <strong style="color: #004098;">기요미즈데라(청수사)</strong> 관람<br>
+                        ■ <strong style="color: #004098;">산넨자카 / 니넨자카</strong> 거리 문화 체험<br>
+                        ■ <strong style="color: #004098;">아라시야마</strong> 탐방 (노노미야신사, 도게츠교, 치쿠린)<br>
+                        ■ 오사카 귀환 후 석식 및 호텔 휴식
+                    </td>
+                    <td>
+                        [조] 호텔식<br><br>
+                        [중] 현지식<br><br>
+                        [석] 현지식
                     </td>
                 </tr>
                 <!-- Day 4 -->
@@ -1104,8 +1104,8 @@
         const mapHints = {
             all: '전체 여정 — 간사이 도착부터 귀국까지 실제 도로 동선',
             day1: '1일차 — 간사이공항 → 롯코산 → 기타노이진칸 → 하버랜드 → 도톤보리 호텔',
-            day2: '2일차 — 호텔 → 도시샤대학 → 이총 → 기요미즈데라 → 아라시야마 → 오사카 귀환',
-            day3: '3일차 — 호텔 → 나라 사슴공원/동대사 → 오사카성 → 도톤보리',
+            day2: '2일차 — 호텔 → 나라 사슴공원/동대사 → 오사카성 → 도톤보리',
+            day3: '3일차 — 호텔 → 도시샤대학 → 이총 → 기요미즈데라 → 아라시야마 → 오사카 귀환',
             day4: '4일차 — 호텔 → 간사이공항 귀국'
         };
         const spots = {
@@ -1125,12 +1125,12 @@
         };
         const routes = {
             all: {
-                points: ['kix', 'rokko', 'kitano', 'harborland', 'hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori'],
+                points: ['kix', 'rokko', 'kitano', 'harborland', 'hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi'],
                 maxZoom: 9,
                 lines: [
                     { pts: ['kix', 'rokko', 'kitano', 'harborland', 'hotel'], color: '#4f46e5' },
-                    { pts: ['hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi', 'hotel'], color: '#d97706' },
                     { pts: ['hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori', 'hotel'], color: '#db2777' },
+                    { pts: ['hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi', 'hotel'], color: '#d97706' },
                     { pts: ['hotel', 'kix'], color: '#64748b' }
                 ]
             },
@@ -1140,14 +1140,14 @@
                 lines: [{ pts: ['kix', 'rokko', 'kitano', 'harborland', 'hotel'], color: '#4f46e5' }]
             },
             day2: {
-                points: ['hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi'],
-                maxZoom: 12,
-                lines: [{ pts: ['hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi', 'hotel'], color: '#d97706' }]
-            },
-            day3: {
                 points: ['hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori'],
                 maxZoom: 11,
                 lines: [{ pts: ['hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori', 'hotel'], color: '#db2777' }]
+            },
+            day3: {
+                points: ['hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi'],
+                maxZoom: 12,
+                lines: [{ pts: ['hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi', 'hotel'], color: '#d97706' }]
             },
             day4: {
                 points: ['hotel', 'kix'],

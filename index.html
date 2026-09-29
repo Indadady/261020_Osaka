@@ -155,6 +155,20 @@
             </nav>
         </header>
 
+        <!-- 행사 기간(2026-10-20 ~ 2026-10-23)에만 표시: 오늘의 일정 / 당일 동선 -->
+        <div id="event-day-bar" class="hidden sticky top-16 z-40 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-sm">
+            <div class="container mx-auto px-4 py-2.5">
+                <div class="grid grid-cols-2 gap-2 max-w-lg mx-auto">
+                    <button type="button" onclick="goToTodaySchedule()" class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-blue-600 bg-blue-600 text-white font-bold text-sm shadow-md active:scale-95 transition">
+                        <i class="fa-solid fa-calendar-day"></i> 오늘의 일정
+                    </button>
+                    <button type="button" onclick="goToTodayRoute()" class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-slate-300 bg-white text-slate-700 font-bold text-sm shadow-sm active:scale-95 transition">
+                        <i class="fa-solid fa-route"></i> 당일 동선
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- Hero -->
         <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-center px-4">
             <div class="animate-fade-in-up text-white w-full max-w-4xl flex flex-col items-center">
@@ -322,34 +336,39 @@
                                 <span class="text-4xl bg-blue-100 p-4 rounded-2xl text-blue-700"><i class="fa-solid fa-anchor"></i></span>
                                 <div>
                                     <h3 class="font-bold text-2xl text-slate-800">낭만적인 항구도시, 고베</h3>
-                                    <p class="text-blue-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 청주 → 간사이공항 → 롯코산 → 기타노이진칸 → 하버랜드 → 오사카</p>
+                                    <p class="text-blue-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 청주 → 간사이 → 롯코산 → 메모리얼파크 → 기타노이진칸 → 오사카</p>
                                 </div>
                             </div>
                             <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8">
                                 <div class="relative">
                                     <div class="timeline-dot bg-blue-600 ring-blue-100"></div>
                                     <h4 class="font-bold text-lg text-slate-800">🛫 청주공항 미팅 후 08:15 출발 / 09:55 간사이 도착</h4>
-                                    <p class="text-slate-600 text-sm mt-2">청주국제공항에서 스루가이드 박지용과 미팅한 뒤 에어로케이(RF312)에 탑승합니다. 간사이 도착 후에는 입국 수속을 하고 고베로 이동합니다.</p>
+                                    <p class="text-slate-600 text-sm mt-2">청주국제공항에서 스루가이드 박지용과 미팅한 뒤 에어로케이(RF312)에 탑승합니다. 간사이 도착 후 입국 수속, 이즈미사노 중식 뒤 고베로 이동합니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-blue-500 ring-blue-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🚠 롯코산 케이블카 & 가든테라스</h4>
-                                    <p class="text-slate-600 text-sm mt-2">고베로 이동 후, 롯코산 케이블카를 타고 고베 전경을 감상한 뒤 가든테라스를 관람합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🍱 11:30 중식 (이즈미사노) 후 고베 이동</h4>
+                                    <p class="text-slate-600 text-sm mt-2">공항 인근에서 중식(일정식)을 진행한 뒤 고베로 이동합니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-blue-500 ring-blue-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🏡 기타노이진칸</h4>
-                                    <p class="text-slate-600 text-sm mt-2">고베 산노미야 언덕의 이국적인 서양관 거리, 기타노이진칸을 둘러봅니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🚠 13:20 롯코산 케이블카 & 가든테라스</h4>
+                                    <p class="text-slate-600 text-sm mt-2">롯코산 케이블카로 고베 전경을 조망하고, 가든테라스를 둘러봅니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-blue-500 ring-blue-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🎡 고베 하버랜드</h4>
-                                    <p class="text-slate-600 text-sm mt-2">탁 트인 고베항의 풍경을 조망하며 하버랜드를 산책합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🕊️ 15:50 메모리얼파크 (메리켄파크)</h4>
+                                    <p class="text-slate-600 text-sm mt-2">1995년 고베대지진을 기리는 메모리얼파크를 방문합니다.</p>
+                                </div>
+                                <div class="relative">
+                                    <div class="timeline-dot bg-blue-500 ring-blue-100"></div>
+                                    <h4 class="font-bold text-lg text-slate-800">🏡 16:45 기타노이진칸</h4>
+                                    <p class="text-slate-600 text-sm mt-2">고베의 이국적인 서양관 거리, 기타노이진칸을 둘러봅니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🏨 오사카 이동 및 석식/호텔 투숙</h4>
-                                    <p class="text-slate-500 text-sm mt-2">오사카 이동 후 현지식으로 석식을 진행하고 호텔에 투숙합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🏨 18:00 오사카 이동 · 석식 · 호텔 투숙</h4>
+                                    <p class="text-slate-500 text-sm mt-2">오사카로 이동해 석식(야키니쿠)을 진행한 뒤 사라사 호텔 도톤보리에 투숙합니다.</p>
                                 </div>
                             </div>
                         </div>
@@ -360,34 +379,29 @@
                                 <span class="text-4xl bg-pink-100 p-4 rounded-2xl text-pink-700"><i class="fa-solid fa-landmark"></i></span>
                                 <div>
                                     <h3 class="font-bold text-2xl text-slate-800">나라 사슴공원 및 도심 자율 탐방</h3>
-                                    <p class="text-pink-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 오사카 → 나라 → 오사카 (도톤보리)</p>
+                                    <p class="text-pink-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 오사카 → 나라 → 오사카성 → 도톤보리</p>
                                 </div>
                             </div>
                             <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8">
                                 <div class="relative">
                                     <div class="timeline-dot bg-pink-600 ring-pink-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🦌 나라 이동 후 사슴공원/동대사 관람</h4>
-                                    <p class="text-slate-600 text-sm mt-2">호텔 조식 후 나라로 이동하여, 대규모 목조 사찰인 동대사(도다이지)와 사슴공원을 여유롭게 관람합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🦌 09:00 나라 이동 · 도다이지 / 사슴공원</h4>
+                                    <p class="text-slate-600 text-sm mt-2">호텔 조식 후 나라로 이동하여 동대사(도다이지)와 사슴공원을 관람합니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-pink-500 ring-pink-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🍽️ 중식: 현지식</h4>
-                                    <p class="text-slate-600 text-sm mt-2">현지식으로 중식을 든든히 진행합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🍱 12:00 중식 (스시정식) 후 오사카 이동</h4>
+                                    <p class="text-slate-600 text-sm mt-2">나라에서 중식을 진행한 뒤 오사카로 복귀합니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-pink-500 ring-pink-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🏯 오사카 복귀 후 오사카성 관람</h4>
-                                    <p class="text-slate-600 text-sm mt-2">오사카로 복귀하여 일본 3대 명성 중 하나인 오사카성을 관람합니다 (천수각 불포함).</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🏯 14:00 오사카성 관람</h4>
+                                    <p class="text-slate-600 text-sm mt-2">일본 3대 명성 중 하나인 오사카성을 관람합니다 (천수각 불포함).</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🌃 신사이바시 및 도톤보리 자유시간</h4>
-                                    <p class="text-slate-500 text-sm mt-2">오사카 시내 최대 번화가에서 도심 상권 탐방과 개별 활동이 가능한 자유시간을 가집니다.</p>
-                                </div>
-                                <div class="relative">
-                                    <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🍜 자율 석식 (인당 ¥3,000 제공)</h4>
-                                    <p class="text-slate-500 text-sm mt-2">제공된 예산으로 현지 맛집을 자율적으로 경험한 후 호텔로 복귀하여 투숙합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🌃 15:30 신사이바시 · 도톤보리 자유시간</h4>
+                                    <p class="text-slate-500 text-sm mt-2">오사카 시내 최대 번화가에서 도심 탐방과 자율 석식(1인 ¥3,000 지원)을 진행합니다. 지정 시간까지 호텔로 복귀합니다.</p>
                                 </div>
                             </div>
                         </div>
@@ -398,7 +412,7 @@
                                 <span class="text-4xl bg-amber-100 p-4 rounded-2xl text-amber-700"><i class="fa-solid fa-torii-gate"></i></span>
                                 <div>
                                     <h3 class="font-bold text-2xl text-slate-800">역사와 문학이 숨쉬는 교토</h3>
-                                    <p class="text-amber-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 오사카 → 교토 전일 탐방 → 오사카</p>
+                                    <p class="text-amber-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 오사카 → 교토 · 아라시야마 → 오사카</p>
                                 </div>
                             </div>
                             <div class="mb-8 rounded-2xl overflow-hidden shadow-md relative group">
@@ -410,28 +424,28 @@
                             <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8">
                                 <div class="relative">
                                     <div class="timeline-dot bg-amber-600 ring-amber-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🎓 도시샤 대학 & 시비 탐방</h4>
-                                    <p class="text-slate-600 text-sm mt-2">호텔 조식 후 교토로 이동해 도시샤 대학 교정을 둘러보고, 윤동주·정지용 시비를 탐방합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🎓 08:00 교토 이동 · 도시샤 대학 & 시비</h4>
+                                    <p class="text-slate-600 text-sm mt-2">호텔 조식 후 교토로 이동해 도시샤 대학 교정과 윤동주·정지용 시비를 탐방합니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-amber-600 ring-amber-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🪦 이총 (귀무덤)</h4>
-                                    <p class="text-slate-600 text-sm mt-2">이총(귀무덤)을 방문해 가슴 아픈 한일 역사 현장을 확인하고 의미를 되새깁니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🪦 10:40 이총 (귀무덤)</h4>
+                                    <p class="text-slate-600 text-sm mt-2">이총(귀무덤)을 방문해 한일 역사 현장의 의미를 되새깁니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-amber-500 ring-amber-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🏯 기요미즈데라(청수사) & 산넨자카</h4>
-                                    <p class="text-slate-600 text-sm mt-2">교토가 한눈에 조망되는 청수사와 일본 전통 감성의 산넨자카/니넨자카를 둘러봅니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🍱 11:30 중식 후 기요미즈데라 · 산넨자카</h4>
+                                    <p class="text-slate-600 text-sm mt-2">중식(유두부정식) 뒤 청수사와 산넨자카·니넨자카를 둘러봅니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-amber-500 ring-amber-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🎋 아라시야마 (노노미야신사/도게츠교/치쿠린)</h4>
-                                    <p class="text-slate-600 text-sm mt-2">아라시야마로 이동하여 노노미야신사, 도게츠다리, 대나무숲길(치쿠린)을 관람합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🎋 14:50 아라시야마 (노노미야신사/도게츠교/치쿠린)</h4>
+                                    <p class="text-slate-600 text-sm mt-2">아라시야마로 이동하여 노노미야신사, 도게츠다리, 대나무숲길을 관람합니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🏨 오사카 귀환 및 석식</h4>
-                                    <p class="text-slate-500 text-sm mt-2">오사카 복귀 후 현지식 석식을 진행하고 호텔에서 휴식합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🏨 18:00 오사카 귀환 · 석식 · 호텔 휴식</h4>
+                                    <p class="text-slate-500 text-sm mt-2">오사카 복귀 후 석식(샤브샤브)을 진행하고 호텔에서 휴식합니다.</p>
                                 </div>
                             </div>
                         </div>
@@ -448,13 +462,13 @@
                             <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8 text-left max-w-3xl mx-auto">
                                 <div class="relative">
                                     <div class="timeline-dot bg-slate-500 ring-slate-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🏨 오전: 조식 후 체크아웃 및 공항 이동</h4>
-                                    <p class="text-slate-600 text-sm mt-2">호텔 조식 후 체크아웃을 완료하고 간사이 국제공항으로 이동합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🏨 07:00 조식 · 체크아웃 / 07:30 공항 이동</h4>
+                                    <p class="text-slate-600 text-sm mt-2">호텔 조식 후 체크아웃을 마치고 간사이 국제공항으로 이동합니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-slate-500 ring-slate-100"></div>
                                     <h4 class="font-bold text-lg text-slate-800">🛫 10:55 간사이 국제공항 출발</h4>
-                                    <p class="text-slate-600 text-sm mt-2">에어로케이 RF311편으로 귀국 일정을 진행합니다.</p>
+                                    <p class="text-slate-600 text-sm mt-2">에어로케이 RF311편으로 귀국합니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
@@ -861,17 +875,17 @@
                     <td>
                         ■ 청주국제공항 스루가이드 박지용 미팅 (피켓: 옥동중학교)<br>
                         ■ 청주국제공항 출발 (에어로케이 RF312 08:15) ✈️ 간사이공항 도착 (09:55)<br>
-                        ■ 입국 수속 후 고베로 이동<br>
-                        ■ <strong style="color: #004098;">롯코산 (케이블카 탑승)</strong> 및 가든테라스 관광<br>
+                        ■ 11:30 중식(이즈미사노) 후 고베 이동<br>
+                        ■ <strong style="color: #004098;">롯코산 (케이블카)</strong> 및 가든테라스<br>
+                        ■ <strong style="color: #004098;">메모리얼파크(메리켄파크)</strong><br>
                         ■ <strong style="color: #004098;">기타노이진칸</strong> 관람<br>
-                        ■ <strong style="color: #004098;">고베 하버랜드</strong> 산책<br>
-                        ■ 오사카 이동 후 석식 진행 및 호텔 투숙<br>
-                        *HOTEL: 사라사 호텔 도톤보리 (또는 동급)
+                        ■ 오사카 이동 후 석식 및 호텔 투숙<br>
+                        *HOTEL: 사라사 호텔 도톤보리
                     </td>
                     <td>
                         [조] -<br><br>
-                        [중] 현지식<br><br>
-                        [석] 현지식
+                        [중] 현지식<br>(일정식)<br><br>
+                        [석] 현지식<br>(야키니쿠)
                     </td>
                 </tr>
                 <!-- Day 2 -->
@@ -879,16 +893,15 @@
                     <td>2일차<br><span class="text-xs font-normal">(10.21)</span></td>
                     <td>
                         ■ 호텔 조식 후 나라로 이동 (약 1시간)<br>
-                        ■ <strong style="color: #004098;">도다이지(동대사)</strong> 관람 및 <strong style="color: #004098;">사슴공원</strong> 체험<br>
-                        ■ 현지식 중식 진행<br>
-                        ■ 오사카 복귀 후 <strong style="color: #004098;">오사카성</strong> 관람 (천수각 불포함)<br>
-                        ■ <strong style="color: #004098;">신사이바시 및 도톤보리</strong> 시내 자유시간<br>
-                        ■ 도톤보리 자율석식 (1인당 ¥3,000 제공)<br>
-                        ■ 지정시간 내 개별 복귀 후 투숙
+                        ■ <strong style="color: #004098;">도다이지(동대사)</strong> 및 <strong style="color: #004098;">사슴공원</strong><br>
+                        ■ 현지식 중식(스시정식) 후 오사카 복귀<br>
+                        ■ <strong style="color: #004098;">오사카성</strong> 관람 (천수각 불포함)<br>
+                        ■ <strong style="color: #004098;">신사이바시 · 도톤보리</strong> 자유시간<br>
+                        ■ 자율석식 (1인당 ¥3,000 제공) 후 호텔 복귀
                     </td>
                     <td>
                         [조] 호텔식<br><br>
-                        [중] 현지식<br><br>
+                        [중] 현지식<br>(스시)<br><br>
                         [석] 자율식<br>(지원)
                     </td>
                 </tr>
@@ -897,25 +910,24 @@
                     <td>3일차<br><span class="text-xs font-normal">(10.22)</span></td>
                     <td>
                         ■ 호텔 조식 후 교토로 이동 (약 1시간 20분)<br>
-                        ■ <strong style="color: #004098;">도시샤 대학</strong> 탐방 및 시비 묵념<br>
+                        ■ <strong style="color: #004098;">도시샤 대학</strong> 및 시비 탐방<br>
                         ■ <strong style="color: #004098;">이총 (귀무덤)</strong> 방문<br>
-                        ■ <strong style="color: #004098;">기요미즈데라(청수사)</strong> 관람<br>
-                        ■ <strong style="color: #004098;">산넨자카 / 니넨자카</strong> 거리 문화 체험<br>
-                        ■ <strong style="color: #004098;">아라시야마</strong> 탐방 (노노미야신사, 도게츠교, 치쿠린)<br>
+                        ■ 중식 후 <strong style="color: #004098;">기요미즈데라</strong> · <strong style="color: #004098;">산넨자카/니넨자카</strong><br>
+                        ■ <strong style="color: #004098;">아라시야마</strong> (노노미야신사, 도게츠교, 치쿠린)<br>
                         ■ 오사카 귀환 후 석식 및 호텔 휴식
                     </td>
                     <td>
                         [조] 호텔식<br><br>
-                        [중] 현지식<br><br>
-                        [석] 현지식
+                        [중] 현지식<br>(유두부)<br><br>
+                        [석] 현지식<br>(샤브샤브)
                     </td>
                 </tr>
                 <!-- Day 4 -->
                 <tr>
                     <td>4일차<br><span class="text-xs font-normal">(10.23)</span></td>
                     <td>
-                        ■ 이른 호텔 조식 후 체크아웃<br>
-                        ■ 간사이 국제공항으로 이동 및 탑승 수속 대기<br>
+                        ■ 07:00 호텔 조식 후 체크아웃 / 07:30 공항 이동<br>
+                        ■ 간사이 국제공항 출국 수속<br>
                         ■ <strong style="color: #c23b3b;">간사이공항 출발 (에어로케이 RF311 10:55) ✈️ 청주국제공항 도착 (12:30)</strong><br>
                         ■ 청주공항 도착 후 안전하게 전원 해산
                     </td>
@@ -944,45 +956,97 @@
     <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.20/leaflet-maplibre-gl.js"></script>
     <script>
         // -----------------------------------------
+        // 0. 행사일 헬퍼 (Asia/Seoul 달력 기준)
+        // -----------------------------------------
+        const TEST_DATE = "";
+        const EVENT_DAYS = {
+            '2026-10-20': 'day1',
+            '2026-10-21': 'day2',
+            '2026-10-22': 'day3',
+            '2026-10-23': 'day4'
+        };
+
+        function getGuidebookToday() {
+            const q = new URLSearchParams(location.search).get('test_date');
+            if (q && /^\d{4}-\d{2}-\d{2}$/.test(q)) return q;
+            if (TEST_DATE) return TEST_DATE;
+            return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul' }).format(new Date());
+        }
+
+        function ymdDiffDays(a, b) {
+            const [ay, am, ad] = a.split('-').map(Number);
+            const [by, bm, bd] = b.split('-').map(Number);
+            return Math.round((Date.UTC(ay, am - 1, ad) - Date.UTC(by, bm - 1, bd)) / 86400000);
+        }
+
+        function getTodayDayKey() {
+            return EVENT_DAYS[getGuidebookToday()] || null;
+        }
+
+        // -----------------------------------------
         // 1. D-Day 및 동적 타이틀 로직 (행사일: 26.10.20 ~ 26.10.23)
         // -----------------------------------------
         document.addEventListener('DOMContentLoaded', () => {
-            const startDate = new Date('2026-10-20T00:00:00+09:00');
-            const endDate = new Date('2026-10-23T23:59:59+09:00');
-            const now = new Date();
+            const todayYmd = getGuidebookToday();
+            const startYmd = '2026-10-20';
+            const endYmd = '2026-10-23';
             const groupName = '영월 옥동중학교';
             
             const badge = document.getElementById('d-day-badge');
             const titleContainer = document.getElementById('hero-title-container');
             const infoBox = document.getElementById('hero-info-box');
             
-            // 날짜 차이 계산
-            const diffStart = Math.ceil((startDate - now) / (1000*60*60*24));
+            const diffStart = ymdDiffDays(startYmd, todayYmd);
+            const currentDay = EVENT_DAYS[todayYmd] ? (ymdDiffDays(todayYmd, startYmd) + 1) : null;
             
             badge.classList.remove('hidden');
             
-            if (now > endDate) {
-                // 행사 후
+            if (ymdDiffDays(todayYmd, endYmd) > 0) {
                 badge.textContent = '🏁 여정 종료';
                 badge.className = 'bg-slate-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold inline-block ml-2';
                 titleContainer.innerHTML = `<h1 class="text-3xl md:text-5xl font-bold mb-4 drop-shadow-2xl font-[Nanum Myeongjo] leading-tight text-yellow-400">모든 여정이 종료되었습니다.<br>좋은 추억으로 오래 간직되길 바랍니다.</h1>`;
                 if(infoBox) infoBox.style.display = 'none';
-            } else if (now >= startDate && now <= endDate) {
-                // 행사 중
-                const currentDay = Math.floor((now - startDate) / (1000*60*60*24)) + 1;
+            } else if (currentDay) {
                 badge.textContent = `📍 ${currentDay}일차 진행중`;
                 badge.className = 'bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold animate-pulse inline-block ml-2';
                 titleContainer.innerHTML = `<h1 class="text-3xl md:text-5xl font-bold mb-4 drop-shadow-2xl font-[Nanum Myeongjo] leading-tight">현재 <span class="text-yellow-400">${groupName}</span>의<br>${currentDay}일차 여정이 활기차게 진행되고 있습니다.</h1>`;
             } else {
-                // 행사 전
                 badge.textContent = diffStart === 0 ? 'D-DAY' : `D-${diffStart}`;
                 badge.className = 'bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold animate-pulse inline-block ml-2';
             }
         });
 
         // -----------------------------------------
-        // 2. Tab & UI Logic
+        // 2. Tab & UI Logic (+ 당일 일정/동선)
         // -----------------------------------------
+        function activateDayTab(dayKey) {
+            const btn = document.querySelector(`.tab-btn[onclick*="'${dayKey}'"]`);
+            if (!btn || typeof openTab !== 'function') return;
+            openTab({ currentTarget: btn }, dayKey);
+        }
+
+        function goToTodaySchedule() {
+            const dayKey = getTodayDayKey();
+            if (dayKey) activateDayTab(dayKey);
+            document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function goToTodayRoute() {
+            const dayKey = getTodayDayKey();
+            if (dayKey && typeof changeMapRoute === 'function') changeMapRoute(dayKey);
+            document.getElementById('map-section')?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function initEventDayUI() {
+            const bar = document.getElementById('event-day-bar');
+            if (!bar) return;
+            const dayKey = getTodayDayKey();
+            const isEventDay = !!dayKey;
+            bar.classList.toggle('hidden', !isEventDay);
+            document.body.classList.toggle('event-day', isEventDay);
+            if (dayKey) activateDayTab(dayKey);
+        }
+
         function openTab(evt, tabId){
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -995,6 +1059,7 @@
                 evt.currentTarget.classList.remove('bg-white','text-slate-500','border-slate-200');
             }
         }
+        initEventDayUI();
 
         function shareLink(){
             const url = window.location.href;
@@ -1105,7 +1170,7 @@
         const osrmCache = {};
         const mapHints = {
             all: '전체 여정 — 간사이 도착부터 귀국까지 실제 도로 동선',
-            day1: '1일차 — 간사이공항 → 롯코산 → 기타노이진칸 → 하버랜드 → 도톤보리 호텔',
+            day1: '1일차 — 간사이공항 → 롯코산 → 메모리얼파크 → 기타노이진칸 → 도톤보리 호텔',
             day2: '2일차 — 호텔 → 나라 사슴공원/동대사 → 오사카성 → 도톤보리',
             day3: '3일차 — 호텔 → 도시샤대학 → 이총 → 기요미즈데라 → 아라시야마 → 오사카 귀환',
             day4: '4일차 — 호텔 → 간사이공항 귀국'
@@ -1113,8 +1178,8 @@
         const spots = {
             kix: { coords: [34.4320, 135.2304], title: '간사이 공항', color: '#64748b', icon: '✈️' },
             rokko: { coords: [34.7644, 135.2477], title: '고베 롯코산', color: '#4f46e5', icon: '🚠' },
+            meriken: { coords: [34.6826, 135.1868], title: '메모리얼파크', color: '#4f46e5', icon: '🕊️' },
             kitano: { coords: [34.7014, 135.1903], title: '기타노이진칸', color: '#4f46e5', icon: '🏡' },
-            harborland: { coords: [34.6792, 135.1865], title: '고베 하버랜드', color: '#4f46e5', icon: '🎡' },
             hotel: { coords: [34.6672, 135.5061], title: '사라사 도톤보리', color: '#1e293b', icon: '🏨' },
             kyoto_doshisha: { coords: [35.0298, 135.7603], title: '도시샤 대학', color: '#d97706', icon: '🎓' },
             kyoto_mimizuka: { coords: [34.9914, 135.7725], title: '이총 (귀무덤)', color: '#d97706', icon: '🪦' },
@@ -1127,19 +1192,19 @@
         };
         const routes = {
             all: {
-                points: ['kix', 'rokko', 'kitano', 'harborland', 'hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi'],
+                points: ['kix', 'rokko', 'meriken', 'kitano', 'hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi'],
                 maxZoom: 9,
                 lines: [
-                    { pts: ['kix', 'rokko', 'kitano', 'harborland', 'hotel'], color: '#4f46e5' },
+                    { pts: ['kix', 'rokko', 'meriken', 'kitano', 'hotel'], color: '#4f46e5' },
                     { pts: ['hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori', 'hotel'], color: '#db2777' },
                     { pts: ['hotel', 'kyoto_doshisha', 'kyoto_mimizuka', 'kyoto_kiyomizu', 'kyoto_arashi', 'hotel'], color: '#d97706' },
                     { pts: ['hotel', 'kix'], color: '#64748b' }
                 ]
             },
             day1: {
-                points: ['kix', 'rokko', 'kitano', 'harborland', 'hotel'],
+                points: ['kix', 'rokko', 'meriken', 'kitano', 'hotel'],
                 maxZoom: 11,
-                lines: [{ pts: ['kix', 'rokko', 'kitano', 'harborland', 'hotel'], color: '#4f46e5' }]
+                lines: [{ pts: ['kix', 'rokko', 'meriken', 'kitano', 'hotel'], color: '#4f46e5' }]
             },
             day2: {
                 points: ['hotel', 'nara_park', 'todaiji', 'osaka_castle', 'dotonbori'],
@@ -1392,7 +1457,7 @@
                     attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>'
                 }).addTo(map);
             }
-            const startKey = initialKey || (isMobileView() ? 'day1' : 'all');
+            const startKey = initialKey || getTodayDayKey() || (isMobileView() ? 'day1' : 'all');
             setMapTab(startKey);
             drawMap(startKey);
         }

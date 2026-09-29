@@ -357,7 +357,7 @@
 
                 <div class="max-w-5xl mx-auto border border-slate-200 rounded-2xl p-1 shadow-lg bg-white relative">
                     <div id="map"></div>
-                    <div id="map-status" class="absolute top-4 left-14 md:left-16 z-[400] bg-white/90 backdrop-blur px-3 py-1.5 rounded-xl shadow font-bold text-xs text-slate-700 pointer-events-none max-w-[calc(100%-4.5rem)]">
+                    <div id="map-status" class="absolute top-4 right-4 z-[400] bg-white/90 backdrop-blur px-3 py-1.5 rounded-xl shadow font-bold text-xs text-slate-700 pointer-events-none max-w-[min(70%,20rem)] text-right">
                         <i class="fa-solid fa-route text-indigo-500 mr-1"></i><span id="map-status-text">실제 도로 동선</span>
                     </div>
                 </div>
@@ -1639,6 +1639,7 @@
             memo.addEventListener('input', () => { localStorage.setItem(KEY, memo.value); autoResize(); });
             window.addEventListener('resize', autoResize);
         })();
+    </script>
     <script>
         const PRINT_FILENAME = '261020_옥동중_오사카_일정표';
         const PAGE_TITLE = document.title;

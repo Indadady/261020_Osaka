@@ -371,7 +371,7 @@
                     <button type="button" onclick="changeMapRoute('day3')" id="btn-map-day3" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">3일차(교토)</button>
                     <button type="button" onclick="changeMapRoute('day4')" id="btn-map-day4" class="map-btn px-5 py-2 rounded-full border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 text-sm font-bold transition">4일차(귀국)</button>
                 </div>
-                <p id="map-hint" class="text-center text-xs text-slate-500 mb-4 font-medium">전체 여정 — 청주 ↔ 간사이 항공 + 현지 차량 동선</p>
+                <p id="map-hint" class="text-center text-xs text-slate-500 mb-4 font-medium">전체 여정 — 영월 학교 ↔ 청주 ↔ 간사이 + 현지 차량 동선</p>
 
                 <div class="map-wrap max-w-5xl mx-auto border border-slate-200 rounded-2xl p-1 shadow-lg bg-white relative z-0">
                     <div id="map"></div>
@@ -423,14 +423,14 @@
                                 <span class="text-4xl bg-blue-100 p-4 rounded-2xl text-blue-700"><i class="fa-solid fa-anchor"></i></span>
                                 <div>
                                     <h3 class="font-bold text-2xl text-slate-800">낭만적인 항구도시, 고베</h3>
-                                    <p class="text-blue-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 청주 → 간사이 → 롯코산 → 메모리얼파크 → 기타노이진칸 → 오사카</p>
+                                    <p class="text-blue-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 영월 학교 → 청주 → 간사이 → 롯코산 → 메모리얼파크 → 기타노이진칸 → 오사카</p>
                                 </div>
                             </div>
                             <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8">
                                 <div class="relative">
                                     <div class="timeline-dot bg-blue-600 ring-blue-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🛫 청주공항 미팅 후 08:15 출발 / 09:55 간사이 도착</h4>
-                                    <p class="text-slate-600 text-sm mt-2">청주국제공항에서 스루가이드 박지용(여, 010-2074-0785)과 미팅한 뒤 에어로케이(RF312)에 탑승합니다. 간사이 도착 후 입국 수속, 이즈미사노 중식 뒤 고베로 이동합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🏫 영월 옥동중 출발 → 청주공항 미팅 · 08:15 출발 / 09:55 간사이 도착</h4>
+                                    <p class="text-slate-600 text-sm mt-2">영월 옥동중학교에서 출발해 청주국제공항으로 이동합니다. 공항에서 스루가이드 박지용(여, 010-2074-0785)과 미팅한 뒤 에어로케이(RF312)에 탑승합니다. 간사이 도착 후 입국 수속, 이즈미사노 중식 뒤 고베로 이동합니다.</p>
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-blue-500 ring-blue-100"></div>
@@ -543,7 +543,7 @@
                                 <span class="text-4xl bg-slate-100 p-4 rounded-2xl text-slate-700"><i class="fa-solid fa-plane-departure"></i></span>
                                 <div class="text-left">
                                     <h3 class="font-bold text-2xl text-slate-800">아쉬움을 뒤로하고, 안전한 귀국길</h3>
-                                    <p class="text-slate-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 오사카 간사이 → 청주 공항</p>
+                                    <p class="text-slate-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 오사카 간사이 → 청주 → 영월 학교</p>
                                 </div>
                             </div>
                             <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8 text-left max-w-3xl mx-auto">
@@ -559,8 +559,8 @@
                                 </div>
                                 <div class="relative">
                                     <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🛬 12:30 청주 국제공항 도착 및 해산</h4>
-                                    <p class="text-slate-500 text-sm mt-2">도착 후 인원 확인을 마치고 안전하게 전원 해산합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🛬 12:30 청주 도착 → 영월 옥동중 도착</h4>
+                                    <p class="text-slate-500 text-sm mt-2">청주국제공항 도착 후 인원 확인을 마치고 전용차량으로 영월 옥동중학교까지 이동합니다.</p>
                                 </div>
                             </div>
                         </div>
@@ -1333,13 +1333,14 @@
         let activeBus = null;
         const osrmCache = {};
         const mapHints = {
-            all: '전체 여정 — 청주 ↔ 간사이 항공(점선) + 현지 차량 동선',
-            day1: '1일차 — 청주 → 간사이 → 롯코산 → 메모리얼파크 → 기타노이진칸 → 도톤보리',
+            all: '전체 여정 — 영월 학교 ↔ 청주 ↔ 간사이 + 현지 차량 동선',
+            day1: '1일차 — 영월 학교 → 청주 → 간사이 → 롯코산 → 메모리얼파크 → 기타노이진칸 → 호텔',
             day2: '2일차 — 호텔 → 나라 사슴공원/동대사 → 오사카성 → 도톤보리',
             day3: '3일차 — 호텔 → 도시샤대학 → 이총 → 기요미즈데라 → 아라시야마 → 오사카 귀환',
-            day4: '4일차 — 호텔 → 간사이 → 청주 귀국'
+            day4: '4일차 — 호텔 → 간사이 → 청주 → 영월 학교 도착'
         };
         const spots = {
+            school: { coords: [37.12835, 128.57048], title: '영월 옥동중', color: '#0f766e', icon: '🏫' },
             cjj: { coords: [36.7166, 127.4991], title: '청주공항', color: '#64748b', icon: '✈️' },
             kix: { coords: [34.4320, 135.2304], title: '간사이 공항', color: '#64748b', icon: '🛬' },
             rokko: { coords: [34.7644, 135.2477], title: '고베 롯코산', color: '#4f46e5', icon: '🚠' },
@@ -1357,21 +1358,24 @@
         };
         const routes = {
             all: {
-                points: ['cjj','kix','rokko','meriken','kitano','hotel','nara_park','todaiji','osaka_castle','dotonbori','kyoto_doshisha','kyoto_mimizuka','kyoto_kiyomizu','kyoto_arashi'],
-                maxZoom: 8,
+                points: ['school','cjj','kix','rokko','meriken','kitano','hotel','nara_park','todaiji','osaka_castle','dotonbori','kyoto_doshisha','kyoto_mimizuka','kyoto_kiyomizu','kyoto_arashi'],
+                maxZoom: 7,
                 lines: [
+                    { pts: ['school','cjj'], color: '#0f766e' },
                     { pts: ['cjj','kix'], color: '#004098', mode: 'air' },
                     { pts: ['kix','rokko','meriken','kitano','hotel'], color: '#4f46e5' },
                     { pts: ['hotel','nara_park','todaiji','osaka_castle','dotonbori','hotel'], color: '#db2777' },
                     { pts: ['hotel','kyoto_doshisha','kyoto_mimizuka','kyoto_kiyomizu','kyoto_arashi','hotel'], color: '#d97706' },
                     { pts: ['hotel','kix'], color: '#64748b' },
-                    { pts: ['kix','cjj'], color: '#64748b', mode: 'air' }
+                    { pts: ['kix','cjj'], color: '#64748b', mode: 'air' },
+                    { pts: ['cjj','school'], color: '#0f766e' }
                 ]
             },
             day1: {
-                points: ['cjj','kix','rokko','meriken','kitano','hotel'],
-                maxZoom: 12,
+                points: ['school','cjj','kix','rokko','meriken','kitano','hotel'],
+                maxZoom: 11,
                 lines: [
+                    { pts: ['school','cjj'], color: '#0f766e' },
                     { pts: ['cjj','kix'], color: '#004098', mode: 'air' },
                     { pts: ['kix','rokko','meriken','kitano','hotel'], color: '#4f46e5' }
                 ]
@@ -1387,11 +1391,12 @@
                 lines: [{ pts: ['hotel','kyoto_doshisha','kyoto_mimizuka','kyoto_kiyomizu','kyoto_arashi','hotel'], color: '#d97706' }]
             },
             day4: {
-                points: ['hotel','kix','cjj'],
+                points: ['hotel','kix','cjj','school'],
                 maxZoom: 11,
                 lines: [
                     { pts: ['hotel','kix'], color: '#64748b' },
-                    { pts: ['kix','cjj'], color: '#64748b', mode: 'air' }
+                    { pts: ['kix','cjj'], color: '#64748b', mode: 'air' },
+                    { pts: ['cjj','school'], color: '#0f766e' }
                 ]
             }
         };
@@ -1702,7 +1707,13 @@
             if (bus && currentMap.hasLayer(bus)) currentMap.removeLayer(bus);
             mapLayers = mapLayers.filter(layer => layer !== bus);
             if (activeBus === bus) activeBus = null;
-            const finalKeys = routeData.points.filter(k => k !== 'cjj');
+            // 종료 요약: 전체·현지일은 일본 기준으로, 4일차는 학교 도착까지 보이게
+            const finalKeys = routeData.points.filter(k => {
+                if (k === 'kix') return false;
+                if (k === 'cjj') return false;
+                if (k === 'school') return routeKey === 'day4';
+                return true;
+            });
             const overviewKeys = finalKeys.length ? finalKeys : routeData.points;
             currentMap.fitBounds(L.latLngBounds(overviewKeys.map(k => spots[k].coords)), {
                 padding: [40, 40],

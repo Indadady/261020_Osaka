@@ -561,7 +561,7 @@
                                 <span class="text-4xl bg-slate-100 p-4 rounded-2xl text-slate-700"><i class="fa-solid fa-plane-departure"></i></span>
                                 <div class="text-left">
                                     <h3 class="font-bold text-2xl text-slate-800">아쉬움을 뒤로하고, 안전한 귀국길</h3>
-                                    <p class="text-slate-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 오사카 간사이 → 청주 → 영월 학교</p>
+                                    <p class="text-slate-600 font-medium text-sm mt-1"><i class="fa-solid fa-map-location-dot"></i> 오사카 간사이 → 청주 → 진천홍보리 → 영월 학교</p>
                                 </div>
                             </div>
                             <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8 text-left max-w-3xl mx-auto">
@@ -576,9 +576,20 @@
                                     <p class="text-slate-600 text-sm mt-2">에어로케이 RF311편으로 귀국합니다.</p>
                                 </div>
                                 <div class="relative">
+                                    <div class="timeline-dot bg-slate-500 ring-slate-100"></div>
+                                    <h4 class="font-bold text-lg text-slate-800">🛬 12:30 청주국제공항 도착</h4>
+                                    <p class="text-slate-600 text-sm mt-2">청주 도착 후 인원 확인을 마치고 전용차량으로 이동합니다.</p>
+                                </div>
+                                <div class="relative">
+                                    <div class="timeline-dot bg-teal-500 ring-teal-100"></div>
+                                    <h4 class="font-bold text-lg text-slate-800">🍱 중식 · 진천홍보리 (보리밥정식)</h4>
+                                    <p class="text-slate-600 text-sm mt-2">충북 진천군 진천읍 성중로 47<br>
+                                    <a href="https://naver.me/FWvpZPuS" target="_blank" rel="noopener" class="text-blue-600 font-bold underline">네이버 지도 바로가기</a></p>
+                                </div>
+                                <div class="relative">
                                     <div class="timeline-dot bg-slate-400 ring-slate-100"></div>
-                                    <h4 class="font-bold text-lg text-slate-800">🛬 12:30 청주 도착 → 영월 옥동중 도착</h4>
-                                    <p class="text-slate-500 text-sm mt-2">청주국제공항 도착 후 인원 확인을 마치고 전용차량으로 영월 옥동중학교까지 이동합니다.</p>
+                                    <h4 class="font-bold text-lg text-slate-800">🏫 영월 옥동중학교 도착 · 귀가</h4>
+                                    <p class="text-slate-500 text-sm mt-2">중식 후 전용차량으로 영월 옥동중학교에 도착한 뒤 귀가합니다.</p>
                                 </div>
                             </div>
                         </div>
@@ -1052,13 +1063,14 @@
                         <td><strong>4일차</strong><br>10/23 (금)<br>귀국</td>
                         <td>
                             ■ 호텔 조식 후 체크아웃 · 간사이국제공항 이동<br>
-                            ■ 출국 수속<br>
-                            ■ 간사이국제공항 출발 (에어로케이 RF311) → 청주국제공항 도착 후 해산
+                            ■ 간사이국제공항 출발 (에어로케이 RF311) → 청주국제공항 도착<br>
+                            ■ 중식 <span class="hl">진천홍보리</span> (보리밥정식) · 진천읍 성중로 47<br>
+                            ■ 영월 옥동중학교 도착 후 귀가
                         </td>
                         <td>
                             <div class="meal-cell">
                                 <div><strong>조:</strong> 호텔식</div>
-                                <div><strong>중:</strong> 불포함</div>
+                                <div><strong>중:</strong> 현지식<br><span style="color:#475569;font-size:10px;">(보리밥정식)</span></div>
                                 <div><strong>석:</strong> 불포함</div>
                             </div>
                         </td>
@@ -1371,10 +1383,11 @@
             day1: '1일차 — 영월 학교 → 청주 → 간사이 → 롯코산 → 메모리얼파크 → 기타노이진칸 → 호텔',
             day2: '2일차 — 호텔 → 나라 사슴공원/동대사 → 오사카성 → 도톤보리',
             day3: '3일차 — 호텔 → 도시샤대학 → 이총 → 기요미즈데라 → 아라시야마 → 오사카 귀환',
-            day4: '4일차 — 호텔 → 간사이 → 청주 → 영월 학교 도착'
+            day4: '4일차 — 호텔 → 간사이 → 청주 → 진천홍보리 → 영월 학교'
         };
         const spots = {
             school: { coords: [37.12835, 128.57048], title: '영월 옥동중', color: '#0f766e', icon: '🏫' },
+            hongbori: { coords: [36.86635, 127.44674], title: '진천홍보리', color: '#0f766e', icon: '🍱' },
             cjj: { coords: [36.7166, 127.4991], title: '청주공항', color: '#64748b', icon: '✈️' },
             kix: { coords: [34.4320, 135.2304], title: '간사이 공항', color: '#64748b', icon: '🛬' },
             rokko: { coords: [34.7644, 135.2477], title: '고베 롯코산', color: '#4f46e5', icon: '🚠' },
@@ -1392,7 +1405,7 @@
         };
         const routes = {
             all: {
-                points: ['school','cjj','kix','rokko','meriken','kitano','hotel','nara_park','todaiji','osaka_castle','dotonbori','kyoto_doshisha','kyoto_mimizuka','kyoto_kiyomizu','kyoto_arashi'],
+                points: ['school','cjj','kix','rokko','meriken','kitano','hotel','nara_park','todaiji','osaka_castle','dotonbori','kyoto_doshisha','kyoto_mimizuka','kyoto_kiyomizu','kyoto_arashi','hongbori'],
                 maxZoom: 7,
                 lines: [
                     { pts: ['school','cjj'], color: '#0f766e' },
@@ -1402,7 +1415,7 @@
                     { pts: ['hotel','kyoto_doshisha','kyoto_mimizuka','kyoto_kiyomizu','kyoto_arashi','hotel'], color: '#d97706' },
                     { pts: ['hotel','kix'], color: '#64748b' },
                     { pts: ['kix','cjj'], color: '#64748b', mode: 'air', minutes: 95 },
-                    { pts: ['cjj','school'], color: '#0f766e' }
+                    { pts: ['cjj','hongbori','school'], color: '#0f766e' }
                 ]
             },
             day1: {
@@ -1425,12 +1438,12 @@
                 lines: [{ pts: ['hotel','kyoto_doshisha','kyoto_mimizuka','kyoto_kiyomizu','kyoto_arashi','hotel'], color: '#d97706' }]
             },
             day4: {
-                points: ['hotel','kix','cjj','school'],
+                points: ['hotel','kix','cjj','hongbori','school'],
                 maxZoom: 11,
                 lines: [
                     { pts: ['hotel','kix'], color: '#64748b' },
                     { pts: ['kix','cjj'], color: '#64748b', mode: 'air', minutes: 95 },
-                    { pts: ['cjj','school'], color: '#0f766e' }
+                    { pts: ['cjj','hongbori','school'], color: '#0f766e' }
                 ]
             }
         };
@@ -1753,7 +1766,7 @@
             const finalKeys = routeData.points.filter(k => {
                 if (k === 'kix') return false;
                 if (k === 'cjj') return false;
-                if (k === 'school') return routeKey === 'day4';
+                if (k === 'hongbori' || k === 'school') return routeKey === 'day4';
                 return true;
             });
             const overviewKeys = finalKeys.length ? finalKeys : routeData.points;

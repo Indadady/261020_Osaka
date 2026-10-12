@@ -321,11 +321,13 @@
                                 <span class="text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold mb-3 inline-block">출국 10.20(화)</span>
                                 <p class="font-black text-xl text-slate-800 mb-1">에어로케이 RF312</p>
                                 <p class="text-slate-600 font-medium text-lg">청주 08:15 <i class="fa-solid fa-plane text-blue-400 mx-2"></i> 간사이 09:55</p>
+                                <p class="text-xs text-slate-500 font-bold mt-2">직항 약 1시간 40분</p>
                             </div>
                             <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 w-full md:w-1/2 text-center">
                                 <span class="text-xs bg-slate-600 text-white px-3 py-1 rounded-full font-bold mb-3 inline-block">귀국 10.23(금)</span>
                                 <p class="font-black text-xl text-slate-800 mb-1">에어로케이 RF311</p>
                                 <p class="text-slate-600 font-medium text-lg">간사이 10:55 <i class="fa-solid fa-plane text-slate-400 mx-2"></i> 청주 12:30</p>
+                                <p class="text-xs text-slate-500 font-bold mt-2">직항 약 1시간 35분</p>
                             </div>
                         </div>
                         <p class="text-center text-sm text-slate-600 mt-5">스루가이드 박지용(여) <a href="tel:010-2074-0785" class="text-blue-600 font-bold">010-2074-0785</a> · 출국 당일 청주국제공항에서 미팅한 뒤 전일정 동행합니다.</p>
@@ -1362,12 +1364,12 @@
                 maxZoom: 7,
                 lines: [
                     { pts: ['school','cjj'], color: '#0f766e' },
-                    { pts: ['cjj','kix'], color: '#004098', mode: 'air' },
+                    { pts: ['cjj','kix'], color: '#004098', mode: 'air', minutes: 100 },
                     { pts: ['kix','rokko','meriken','kitano','hotel'], color: '#4f46e5' },
                     { pts: ['hotel','nara_park','todaiji','osaka_castle','dotonbori','hotel'], color: '#db2777' },
                     { pts: ['hotel','kyoto_doshisha','kyoto_mimizuka','kyoto_kiyomizu','kyoto_arashi','hotel'], color: '#d97706' },
                     { pts: ['hotel','kix'], color: '#64748b' },
-                    { pts: ['kix','cjj'], color: '#64748b', mode: 'air' },
+                    { pts: ['kix','cjj'], color: '#64748b', mode: 'air', minutes: 95 },
                     { pts: ['cjj','school'], color: '#0f766e' }
                 ]
             },
@@ -1376,7 +1378,7 @@
                 maxZoom: 11,
                 lines: [
                     { pts: ['school','cjj'], color: '#0f766e' },
-                    { pts: ['cjj','kix'], color: '#004098', mode: 'air' },
+                    { pts: ['cjj','kix'], color: '#004098', mode: 'air', minutes: 100 },
                     { pts: ['kix','rokko','meriken','kitano','hotel'], color: '#4f46e5' }
                 ]
             },
@@ -1395,7 +1397,7 @@
                 maxZoom: 11,
                 lines: [
                     { pts: ['hotel','kix'], color: '#64748b' },
-                    { pts: ['kix','cjj'], color: '#64748b', mode: 'air' },
+                    { pts: ['kix','cjj'], color: '#64748b', mode: 'air', minutes: 95 },
                     { pts: ['cjj','school'], color: '#0f766e' }
                 ]
             }
@@ -1417,7 +1419,8 @@
         }
         function estimateSeconds(meters, mode) {
             if (!meters || meters <= 0) return 0;
-            if (mode === 'air') return meters / (800 / 3.6);
+            // 항공은 순항속도만이 아니라 지상·이착륙을 포함한 블록타임에 가깝게
+            if (mode === 'air') return meters / (800 / 3.6) + 40 * 60;
             return meters / (25 / 3.6);
         }
         function groupTravelSeconds(seconds, mode) {
@@ -1628,14 +1631,21 @@
             const legs = [];
             routeData.lines.forEach(lineDef => {
                 for (let i = 0; i < lineDef.pts.length - 1; i++) {
-                    legs.push({ from: lineDef.pts[i], to: lineDef.pts[i + 1], color: lineDef.color, mode: lineDef.mode || 'drive' });
+                    legs.push({
+                        from: lineDef.pts[i],
+                        to: lineDef.pts[i + 1],
+                        color: lineDef.color,
+                        mode: lineDef.mode || 'drive',
+                        minutes: lineDef.minutes || 0
+                    });
                 }
             });
             const packed = await Promise.all(legs.map(async leg => {
                 if (leg.mode === 'air') {
                     const path = [spots[leg.from].coords, spots[leg.to].coords];
                     const meters = pathMeters(path);
-                    return { path, meters, seconds: estimateSeconds(meters, 'air') };
+                    const seconds = leg.minutes > 0 ? leg.minutes * 60 : estimateSeconds(meters, 'air');
+                    return { path, meters, seconds };
                 }
                 return roadPath([spots[leg.from].coords, spots[leg.to].coords]);
             }));
